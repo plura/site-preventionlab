@@ -1,0 +1,8 @@
+# SFTP credentials
+.vscode/sftp.json
+
+# Allow example file
+!.vscode/sftp.json.example
+
+# Claude
+.claude/

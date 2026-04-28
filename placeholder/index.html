@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PreventionLab — Em Breve</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --green:  #2d6a4f;
+            --green-light: #52b788;
+            --cream:  #f8f5f0;
+            --dark:   #1a1a1a;
+            --muted:  #6b7280;
+            --white:  #ffffff;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Georgia', serif;
+            background: var(--cream);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* ── Background canvas ── */
+        #bg-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ── Layout ── */
+        .page {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* ── Logo / brand ── */
+        .brand {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .brand-mark {
+            width: 56px;
+            height: 56px;
+            background: var(--green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+        }
+
+        .brand-mark svg {
+            color: var(--white);
+        }
+
+        .brand-name {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: 400;
+            letter-spacing: .08em;
+            color: var(--green);
+            text-transform: uppercase;
+        }
+
+        .brand-tagline {
+            margin-top: .5rem;
+            font-size: .875rem;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+
+        /* ── Divider ── */
+        .divider {
+            width: 0;
+            height: 1px;
+            background: var(--green-light);
+            margin: 2.5rem auto;
+            opacity: .6;
+        }
+
+        /* ── Headline ── */
+        .headline {
+            opacity: 0;
+        }
+
+        .headline h1 {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 400;
+            color: var(--dark);
+            line-height: 1.6;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .headline p {
+            margin-top: .75rem;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: .9rem;
+            color: var(--muted);
+        }
+
+        /* ── Contact ── */
+        .contact {
+            opacity: 0;
+            margin-top: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            justify-content: center;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+
+        .contact a {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            color: var(--dark);
+            text-decoration: none;
+            font-size: .9rem;
+            transition: color .2s;
+        }
+
+        .contact a:hover { color: var(--green); }
+
+        .contact a svg {
+            flex-shrink: 0;
+            color: var(--green-light);
+        }
+
+        /* ── CTA ── */
+        .cta-wrap {
+            opacity: 0;
+            margin-top: 2.5rem;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            padding: .85rem 2.2rem;
+            background: var(--green);
+            color: var(--white);
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: .875rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background .2s, transform .15s;
+        }
+
+        .btn-cta:hover {
+            background: #235c42;
+            transform: translateY(-1px);
+        }
+
+        /* ── Modal ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(26,26,26,.55);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.open { display: flex; }
+
+        .modal {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 2.5rem 2rem;
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            box-shadow: 0 24px 64px rgba(0,0,0,.15);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--muted);
+            transition: color .2s;
+            line-height: 1;
+            padding: .25rem;
+        }
+
+        .modal-close:hover { color: var(--dark); }
+
+        .modal h2 {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--green);
+            margin-bottom: .4rem;
+        }
+
+        .modal p {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: .875rem;
+            color: var(--muted);
+            margin-bottom: 1.75rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: .775rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: .4rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: .65rem .85rem;
+            border: 1px solid #e0dbd4;
+            border-radius: 2px;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: .9rem;
+            color: var(--dark);
+            background: var(--cream);
+            transition: border-color .2s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--green-light);
+        }
+
+        .form-group textarea { resize: vertical; min-height: 90px; }
+
+        .btn-submit {
+            width: 100%;
+            padding: .85rem;
+            background: var(--green);
+            color: var(--white);
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: .875rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            margin-top: .5rem;
+            transition: background .2s;
+        }
+
+        .btn-submit:hover { background: #235c42; }
+
+        /* ── Footer ── */
+        .footer {
+            opacity: 0;
+            margin-top: 3.5rem;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: .775rem;
+            color: var(--muted);
+            letter-spacing: .06em;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<div class="page">
+
+    <div class="brand">
+        <div class="brand-mark">
+            <i data-lucide="leaf" width="26" height="26"></i>
+        </div>
+        <div class="brand-name">PreventionLab</div>
+        <div class="brand-tagline">Stress &nbsp;·&nbsp; Sleep &nbsp;·&nbsp; Longevity</div>
+    </div>
+
+    <div class="divider" id="divider"></div>
+
+    <div class="headline">
+        <h1>O nosso site está a ser preparado.<br>Em breve, estaremos aqui.</h1>
+        <p>Something meaningful is coming.</p>
+    </div>
+
+    <div class="contact">
+        <a href="tel:+351912198818">
+            <i data-lucide="phone" width="17" height="17"></i>
+            +351 912 198 818
+        </a>
+        <a href="mailto:geral@preventionlab.pt">
+            <i data-lucide="mail" width="17" height="17"></i>
+            geral@preventionlab.pt
+        </a>
+    </div>
+
+    <div class="cta-wrap">
+        <button class="btn-cta" id="open-modal">Saber Mais</button>
+    </div>
+
+    <div class="footer">&copy; 2026 PreventionLab. Todos os direitos reservados.</div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+        <button class="modal-close" id="close-modal" aria-label="Fechar">
+            <i data-lucide="x" width="20" height="20"></i>
+        </button>
+        <h2 id="modal-title">Fique a par</h2>
+        <p>Deixe os seus dados e entraremos em contacto assim que estivermos disponíveis.</p>
+        <form id="contact-form" novalidate>
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" id="name" name="name" placeholder="O seu nome" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="o.seu@email.com" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Telefone (opcional)</label>
+                <input type="tel" id="phone" name="phone" placeholder="+351 900 000 000">
+            </div>
+            <div class="form-group">
+                <label for="interest">Interesse</label>
+                <select id="interest" name="interest">
+                    <option value="">Selecione uma área...</option>
+                    <option value="stress">Gestão de Stress</option>
+                    <option value="sleep">Qualidade do Sono</option>
+                    <option value="longevity">Longevidade</option>
+                    <option value="corporate">Programa Corporativo</option>
+                    <option value="other">Outro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Mensagem (opcional)</label>
+                <textarea id="message" name="message" placeholder="Em que podemos ajudar?"></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Enviar</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // ── Lucide icons ──
+    lucide.createIcons();
+
+    // ── Ambient particle canvas ──
+    (function () {
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let W, H, particles;
+
+        function resize() {
+            W = canvas.width  = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+
+        function Particle() {
+            this.reset(true);
+        }
+
+        Particle.prototype.reset = function (initial) {
+            this.x  = Math.random() * (W || window.innerWidth);
+            this.y  = initial ? Math.random() * (H || window.innerHeight) : (H || window.innerHeight) + 10;
+            this.r  = Math.random() * 2.5 + .5;
+            this.vy = -(Math.random() * .4 + .15);
+            this.vx = (Math.random() - .5) * .2;
+            this.o  = Math.random() * .25 + .05;
+        };
+
+        Particle.prototype.update = function () {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.y < -10) this.reset(false);
+        };
+
+        Particle.prototype.draw = function () {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(82,183,136,${this.o})`;
+            ctx.fill();
+        };
+
+        function init() {
+            resize();
+            particles = Array.from({ length: 55 }, () => new Particle());
+        }
+
+        function loop() {
+            ctx.clearRect(0, 0, W, H);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(loop);
+        }
+
+        window.addEventListener('resize', resize);
+        init();
+        loop();
+    })();
+
+    // ── GSAP entrance animations ──
+    gsap.to('.brand',   { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: .3 });
+    gsap.to('#divider', { width: 80,  duration: .8, ease: 'power2.inOut', delay: .9 });
+    gsap.to('.headline',{ opacity: 1, duration: .9, ease: 'power2.out', delay: 1.1 });
+    gsap.to('.contact', { opacity: 1, y: 0, duration: .8, ease: 'power2.out', delay: 1.4,
+        onStart() { document.querySelector('.contact').style.transform = 'translateY(12px)'; },
+        onComplete() { document.querySelector('.contact').style.transform = ''; }
+    });
+    gsap.fromTo('.contact', { y: 12 }, { y: 0, duration: .8, ease: 'power2.out', delay: 1.4 });
+    gsap.to('.cta-wrap', { opacity: 1, duration: .7, ease: 'power2.out', delay: 1.7 });
+    gsap.to('.footer',   { opacity: 1, duration: .7, ease: 'power2.out', delay: 2 });
+
+    // ── Modal logic ──
+    const overlay   = document.getElementById('modal-overlay');
+    const openBtn   = document.getElementById('open-modal');
+    const closeBtn  = document.getElementById('close-modal');
+    const form      = document.getElementById('contact-form');
+
+    function openModal() {
+        overlay.classList.add('open');
+        gsap.fromTo('.modal', { opacity: 0, y: 24, scale: .97 }, { opacity: 1, y: 0, scale: 1, duration: .35, ease: 'power2.out' });
+    }
+
+    function closeModal() {
+        gsap.to('.modal', { opacity: 0, y: 16, scale: .97, duration: .25, ease: 'power2.in',
+            onComplete() { overlay.classList.remove('open'); }
+        });
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        // Form processing will be added later
+        console.log('Form submitted', Object.fromEntries(new FormData(form)));
+        closeModal();
+    });
+</script>
+</body>
+</html>
