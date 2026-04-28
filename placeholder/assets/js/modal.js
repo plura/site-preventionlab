@@ -1,41 +1,48 @@
-const { gsap } = window;
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 const dialog   = document.getElementById('contact-dialog');
 const openBtn  = document.getElementById('open-modal');
 const closeBtn = document.getElementById('close-modal');
 const form     = document.getElementById('contact-form');
 
+let opener = null;
+
+function trapFocus() {
+    const els   = [...dialog.querySelectorAll(FOCUSABLE)];
+    if (!els.length) return;
+    const first = els[0];
+    const last  = els[els.length - 1];
+
+    const onKeyDown = (e) => {
+        if (e.key !== 'Tab') return;
+        if (e.shiftKey) {
+            if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+            if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+        }
+    };
+
+    dialog.addEventListener('keydown', onKeyDown);
+    dialog.addEventListener('close', () => dialog.removeEventListener('keydown', onKeyDown), { once: true });
+}
+
 function openModal() {
+    opener = document.activeElement;
     dialog.showModal();
-    gsap.fromTo(dialog,
-        { opacity: 0, y: 24, scale: .97 },
-        { opacity: 1, y: 0,  scale: 1, duration: .35, ease: 'power2.out' }
-    );
+    trapFocus();
 }
 
 function closeModal() {
-    gsap.to(dialog, {
-        opacity: 0, y: 16, scale: .97, duration: .25, ease: 'power2.in',
-        onComplete() { dialog.close(); }
-    });
+    dialog.close();
+    opener?.focus();
 }
 
 openBtn.addEventListener('click', openModal);
 closeBtn.addEventListener('click', closeModal);
 
-// Intercept native ESC to use animated close instead
-dialog.addEventListener('cancel', e => {
-    e.preventDefault();
-    closeModal();
-});
-
-// Close on backdrop click
+// Close on backdrop click (click lands on the dialog element itself, not .dialog__inner)
 dialog.addEventListener('click', e => {
-    const rect = dialog.getBoundingClientRect();
-    if (e.clientX < rect.left || e.clientX > rect.right ||
-        e.clientY < rect.top  || e.clientY > rect.bottom) {
-        closeModal();
-    }
+    if (e.target === dialog) closeModal();
 });
 
 form.addEventListener('submit', function (e) {

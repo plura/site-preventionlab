@@ -132,18 +132,61 @@
 
 /* ── Modal ── */
 dialog {
+    background: transparent;
     border: none;
-    padding: var(--pl-space-xl) var(--pl-space-lg);
-    width: calc(100% - 2rem);
-    max-width: 440px;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, .15);
-    background: var(--pl-color-white);
+    margin: auto;
+    max-height: 100dvh;
+    max-width: 100vw;
+    opacity: 0;
+    padding: 0;
+    transform: translateY(12px);
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease,
+        overlay 0.35s ease allow-discrete,
+        display 0.35s ease allow-discrete;
+    width: min(440px, 90vw);
+}
+
+dialog[open] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@starting-style {
+    dialog[open] {
+        opacity: 0;
+        transform: translateY(12px);
+    }
 }
 
 dialog::backdrop {
-    background: var(--pl-color-overlay);
-    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(0px);
+    background: color-mix(in srgb, var(--pl-color-dark) 0%, transparent);
+    transition:
+        background 0.35s ease,
+        backdrop-filter 0.35s ease,
+        overlay 0.35s ease allow-discrete,
+        display 0.35s ease allow-discrete;
+}
+
+dialog[open]::backdrop {
     backdrop-filter: blur(4px);
+    background: color-mix(in srgb, var(--pl-color-dark) 55%, transparent);
+}
+
+@starting-style {
+    dialog[open]::backdrop {
+        backdrop-filter: blur(0px);
+        background: color-mix(in srgb, var(--pl-color-dark) 0%, transparent);
+    }
+}
+
+.dialog__inner {
+    background: var(--pl-color-white);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, .15);
+    padding: var(--pl-space-xl) var(--pl-space-lg);
+    position: relative;
 }
 
 .modal-close {
