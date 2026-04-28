@@ -1,8 +1,8 @@
-import { createIcons, Leaf, Phone, Mail, X } from 'https://unpkg.com/lucide@latest/dist/esm/lucide.js';
+import { createIcons, Leaf, Phone, Mail, X, Instagram, Facebook, Linkedin } from 'https://unpkg.com/lucide@latest/dist/esm/lucide.js';
 import { gsap } from 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js';
 
 // ── Lucide icons ──
-createIcons({ icons: { Leaf, Phone, Mail, X } });
+createIcons({ icons: { Leaf, Phone, Mail, X, Instagram, Facebook, Linkedin } });
 
 // ── Ambient particle canvas ──
 (function () {
@@ -62,8 +62,9 @@ gsap.to('.brand',    { opacity: 1, y: 0, duration: 1,   ease: 'power3.out', dela
 gsap.to('#divider',  { width: 80,        duration: .8,   ease: 'power2.inOut', delay: .9 });
 gsap.to('.headline', { opacity: 1,       duration: .9,   ease: 'power2.out', delay: 1.1 });
 gsap.fromTo('.contact', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .8, ease: 'power2.out', delay: 1.4 });
-gsap.to('.cta-wrap', { opacity: 1,       duration: .7,   ease: 'power2.out', delay: 1.7 });
-gsap.to('.footer',   { opacity: 1,       duration: .7,   ease: 'power2.out', delay: 2 });
+gsap.to('.cta-wrap', { opacity: 1, duration: .7, ease: 'power2.out', delay: 1.7 });
+gsap.to('.socials',  { opacity: 1, duration: .7, ease: 'power2.out', delay: 1.9 });
+gsap.to('.footer',   { opacity: 1, duration: .7, ease: 'power2.out', delay: 2.1 });
 
 // ── Modal logic ──
 const overlay  = document.getElementById('modal-overlay');

@@ -269,6 +269,23 @@ html, body {
 
 .btn-submit:hover { background: #235c42; }
 
+/* ── Socials ── */
+.socials {
+    opacity: 0;
+    margin-top: 2rem;
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+}
+
+.socials a {
+    color: var(--muted);
+    transition: color .2s;
+    line-height: 1;
+}
+
+.socials a:hover { color: var(--green); }
+
 /* ── Footer ── */
 .footer {
     opacity: 0;
