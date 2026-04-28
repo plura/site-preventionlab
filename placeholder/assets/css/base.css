@@ -1,0 +1,280 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --green:       #2d6a4f;
+    --green-light: #52b788;
+    --cream:       #f8f5f0;
+    --dark:        #1a1a1a;
+    --muted:       #6b7280;
+    --white:       #ffffff;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Georgia', serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+}
+
+/* ── Background canvas ── */
+#bg-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ── Layout ── */
+.page {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+}
+
+/* ── Logo / brand ── */
+.brand {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.brand-mark {
+    width: 56px;
+    height: 56px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+}
+
+.brand-mark svg {
+    color: var(--white);
+}
+
+.brand-name {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 400;
+    letter-spacing: .08em;
+    color: var(--green);
+    text-transform: uppercase;
+}
+
+.brand-tagline {
+    margin-top: .5rem;
+    font-size: .875rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+/* ── Divider ── */
+.divider {
+    width: 0;
+    height: 1px;
+    background: var(--green-light);
+    margin: 2.5rem auto;
+    opacity: .6;
+}
+
+/* ── Headline ── */
+.headline {
+    opacity: 0;
+}
+
+.headline h1 {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-weight: 400;
+    color: var(--dark);
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.headline p {
+    margin-top: .75rem;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: .9rem;
+    color: var(--muted);
+}
+
+/* ── Contact ── */
+.contact {
+    opacity: 0;
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    justify-content: center;
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+.contact a {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    color: var(--dark);
+    text-decoration: none;
+    font-size: .9rem;
+    transition: color .2s;
+}
+
+.contact a:hover { color: var(--green); }
+
+.contact a svg {
+    flex-shrink: 0;
+    color: var(--green-light);
+}
+
+/* ── CTA ── */
+.cta-wrap {
+    opacity: 0;
+    margin-top: 2.5rem;
+}
+
+.btn-cta {
+    display: inline-block;
+    padding: .85rem 2.2rem;
+    background: var(--green);
+    color: var(--white);
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: .875rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background .2s, transform .15s;
+}
+
+.btn-cta:hover {
+    background: #235c42;
+    transform: translateY(-1px);
+}
+
+/* ── Modal ── */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(26,26,26,.55);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal {
+    background: var(--white);
+    border-radius: 4px;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 440px;
+    position: relative;
+    box-shadow: 0 24px 64px rgba(0,0,0,.15);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--muted);
+    transition: color .2s;
+    line-height: 1;
+    padding: .25rem;
+}
+
+.modal-close:hover { color: var(--dark); }
+
+.modal h2 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--green);
+    margin-bottom: .4rem;
+}
+
+.modal p {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: .875rem;
+    color: var(--muted);
+    margin-bottom: 1.75rem;
+}
+
+.form-group {
+    margin-bottom: 1.1rem;
+}
+
+.form-group label {
+    display: block;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: .775rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: .4rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: .65rem .85rem;
+    border: 1px solid #e0dbd4;
+    border-radius: 2px;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: .9rem;
+    color: var(--dark);
+    background: var(--cream);
+    transition: border-color .2s;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--green-light);
+}
+
+.form-group textarea { resize: vertical; min-height: 90px; }
+
+.btn-submit {
+    width: 100%;
+    padding: .85rem;
+    background: var(--green);
+    color: var(--white);
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: .875rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-top: .5rem;
+    transition: background .2s;
+}
+
+.btn-submit:hover { background: #235c42; }
+
+/* ── Footer ── */
+.footer {
+    opacity: 0;
+    margin-top: 3.5rem;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: .775rem;
+    color: var(--muted);
+    letter-spacing: .06em;
+}
