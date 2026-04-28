@@ -1,9 +1,7 @@
-import { createIcons, Leaf, Phone, Mail, X, Instagram, Facebook, Linkedin } from 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/esm/lucide.js';
-
-const { gsap } = window;
+const { gsap, lucide } = window;
 
 // ── Lucide icons ──
-createIcons({ icons: { Leaf, Phone, Mail, X, Instagram, Facebook, Linkedin } });
+lucide.createIcons();
 
 // ── Ambient particle canvas ──
 (function () {
