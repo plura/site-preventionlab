@@ -1,5 +1,6 @@
-import { createIcons, Leaf, Phone, Mail, X, Instagram, Facebook, Linkedin } from 'https://unpkg.com/lucide@latest/dist/esm/lucide.js';
-import { gsap } from 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js';
+import { createIcons, Leaf, Phone, Mail, X, Instagram, Facebook, Linkedin } from 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/esm/lucide.js';
+
+const { gsap } = window;
 
 // ── Lucide icons ──
 createIcons({ icons: { Leaf, Phone, Mail, X, Instagram, Facebook, Linkedin } });
@@ -15,31 +16,31 @@ createIcons({ icons: { Leaf, Phone, Mail, X, Instagram, Facebook, Linkedin } });
         H = canvas.height = window.innerHeight;
     }
 
-    function Particle() {
-        this.reset(true);
+    class Particle {
+        constructor() { this.reset(true); }
+
+        reset(initial) {
+            this.x  = Math.random() * (W || window.innerWidth);
+            this.y  = initial ? Math.random() * (H || window.innerHeight) : (H || window.innerHeight) + 10;
+            this.r  = Math.random() * 2.5 + .5;
+            this.vy = -(Math.random() * .4 + .15);
+            this.vx = (Math.random() - .5) * .2;
+            this.o  = Math.random() * .25 + .05;
+        }
+
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.y < -10) this.reset(false);
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(82,183,136,${this.o})`;
+            ctx.fill();
+        }
     }
-
-    Particle.prototype.reset = function (initial) {
-        this.x  = Math.random() * (W || window.innerWidth);
-        this.y  = initial ? Math.random() * (H || window.innerHeight) : (H || window.innerHeight) + 10;
-        this.r  = Math.random() * 2.5 + .5;
-        this.vy = -(Math.random() * .4 + .15);
-        this.vx = (Math.random() - .5) * .2;
-        this.o  = Math.random() * .25 + .05;
-    };
-
-    Particle.prototype.update = function () {
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.y < -10) this.reset(false);
-    };
-
-    Particle.prototype.draw = function () {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(82,183,136,${this.o})`;
-        ctx.fill();
-    };
 
     function init() {
         resize();
