@@ -1,8 +1,6 @@
 /* ── Logo vars ── */
 :root {
     --pl-logo-o-size:           clamp(8rem, 22vw, 13rem);
-    --pl-logo-o-left:           var(--pl-color-accent);
-    --pl-logo-o-right:          var(--pl-color-dark);
     --pl-logo-name-size:        clamp(1.3rem, 4vw, 2rem);
     --pl-logo-name-tracking:    0.25em;
     --pl-logo-lab-size:         clamp(0.5rem, 1.3vw, 0.72rem);
@@ -36,17 +34,8 @@
     line-height: 1;
 }
 
-.pl-logo__o--left {
-    clip-path: inset(0 50% 0 0);
-    transform: translateX(-0.06em);
-    color: var(--pl-logo-o-left);
-}
-
-.pl-logo__o--right {
-    clip-path: inset(0 0 0 50%);
-    transform: translateX(0.06em);
-    color: var(--pl-logo-o-right);
-}
+.pl-logo__o--left  { clip-path: inset(0 50% 0 0); }
+.pl-logo__o--right { clip-path: inset(0 0 0 50%); }
 
 /* ── Wordmark row ──
    inline-block so width = PREVENTION only.
