@@ -1,7 +1,7 @@
 /* ── Logo vars ── */
 :root {
     --pl-logo-o-size:           clamp(8rem, 22vw, 13rem);
-    --pl-logo-name-size:        clamp(1.3rem, 4vw, 2rem);
+    --pl-logo-name-size:        clamp(1.7rem, 4vw, 2rem);
     --pl-logo-name-tracking:    0.25em;
     --pl-logo-lab-size:         clamp(0.5rem, 1.3vw, 0.72rem);
     --pl-logo-lab-offset:       0.3rem;
