@@ -1,6 +1,5 @@
 /* ── Contact ── */
 .contact {
-    opacity: 0;
     display: flex;
     flex-wrap: wrap;
     gap: var(--pl-space-md);
@@ -64,9 +63,7 @@
 .btn-submit:hover { background: var(--pl-color-accent); color: var(--pl-color-dark); }
 
 /* ── CTA wrap ── */
-.cta-wrap {
-    opacity: 0;
-}
+.cta-wrap {}
 
 /* ── Modal ── */
 dialog {
@@ -215,7 +212,6 @@ dialog p {
 
 /* ── Socials ── */
 .socials {
-    opacity: 0;
     display: flex;
     gap: var(--pl-space-md);
     justify-content: center;
@@ -242,7 +238,6 @@ dialog p {
 
 /* ── Footer ── */
 .footer {
-    opacity: 0;
     font-size: var(--pl-text-xs);
     color: var(--pl-color-muted);
     letter-spacing: var(--pl-tracking-sm);

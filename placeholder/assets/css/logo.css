@@ -16,7 +16,6 @@
     align-items: center;
     color: var(--pl-color-dark);
     user-select: none;
-    opacity: 0;
 }
 
 /* ── Mark: split O ── */
