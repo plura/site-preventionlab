@@ -25,10 +25,10 @@
     --pl-font-sans:  'Helvetica Neue', sans-serif;
 
     /* Typography — sizes */
-    --pl-text-xs:   0.775rem;
-    --pl-text-sm:   0.875rem;
-    --pl-text-base: 0.9rem;
-    --pl-text-lg:   1.25rem;
+    --pl-text-xs:   clamp(0.7rem,   1.8vw, 0.775rem);
+    --pl-text-sm:   clamp(0.8rem,   2vw,   0.875rem);
+    --pl-text-base: clamp(0.85rem,  2.2vw, 0.95rem);
+    --pl-text-lg:   clamp(1rem,     2.5vw, 1.25rem);
 
     /* Typography — letter spacing */
     --pl-tracking-sm:   0.06em;
