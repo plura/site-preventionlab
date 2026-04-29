@@ -6,3 +6,6 @@
 
 # Claude
 .claude/
+
+# Form config (SMTP credentials)
+placeholder/config.php

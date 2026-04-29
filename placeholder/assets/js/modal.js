@@ -1,5 +1,4 @@
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
-const W3F_KEY   = 'c72cbdd8-bd65-4435-a988-7cb75d1e8b35';
 
 const dialog   = document.getElementById('contact-dialog');
 const openBtn  = document.getElementById('open-modal');
@@ -59,15 +58,12 @@ form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const data = new FormData(form);
-    data.append('access_key', W3F_KEY);
-    data.append('subject', 'PreventionLab — novo contacto do site');
-    data.append('from_name', 'PreventionLab Site');
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'A enviar…';
 
     try {
-        const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+        const res  = await fetch('./submit.php', { method: 'POST', body: data });
         const json = await res.json();
 
         if (res.ok && json.success) {
