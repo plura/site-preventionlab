@@ -211,6 +211,22 @@ dialog p {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23111111' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
+/* ── Form feedback ── */
+.form-success {
+    font-size: var(--pl-text-sm);
+    color: var(--pl-color-dark);
+    text-align: center;
+    padding: 2rem 0 1rem;
+    letter-spacing: var(--pl-tracking-sm);
+}
+
+.form-error {
+    font-size: var(--pl-text-xs);
+    color: #b04040;
+    margin-bottom: 0.75rem;
+    letter-spacing: var(--pl-tracking-sm);
+}
+
 /* ── Socials ── */
 .socials {
     display: flex;

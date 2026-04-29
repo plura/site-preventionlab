@@ -1,9 +1,11 @@
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+const W3F_KEY   = 'c72cbdd8-bd65-4435-a988-7cb75d1e8b35';
 
 const dialog   = document.getElementById('contact-dialog');
 const openBtn  = document.getElementById('open-modal');
 const closeBtn = document.getElementById('close-modal');
 const form     = document.getElementById('contact-form');
+const submitBtn = form.querySelector('[type="submit"]');
 
 let opener = null;
 
@@ -37,6 +39,14 @@ function closeModal() {
     opener?.focus();
 }
 
+dialog.addEventListener('close', () => {
+    form.reset();
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Enviar';
+    form.querySelectorAll('.form-success, .form-error').forEach(el => el.remove());
+    form.querySelectorAll('.form-group, .btn-submit').forEach(el => el.style.display = '');
+});
+
 openBtn.addEventListener('click', openModal);
 closeBtn.addEventListener('click', closeModal);
 
@@ -45,9 +55,34 @@ dialog.addEventListener('click', e => {
     if (e.target === dialog) closeModal();
 });
 
-form.addEventListener('submit', function (e) {
+form.addEventListener('submit', async function (e) {
     e.preventDefault();
-    // Form processing will be added later
-    console.log('Form submitted', Object.fromEntries(new FormData(form)));
-    closeModal();
+
+    const data = new FormData(form);
+    data.append('access_key', W3F_KEY);
+    data.append('subject', 'PreventionLab — novo contacto do site');
+    data.append('from_name', 'PreventionLab Site');
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'A enviar…';
+
+    try {
+        const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+        const json = await res.json();
+
+        if (json.success) {
+            form.querySelectorAll('.form-group, .btn-submit').forEach(el => el.style.display = 'none');
+            const msg = Object.assign(document.createElement('p'), { className: 'form-success', textContent: 'Mensagem enviada. Entraremos em contacto em breve.' });
+            form.appendChild(msg);
+            setTimeout(closeModal, 2800);
+        } else {
+            throw new Error(json.message);
+        }
+    } catch {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar';
+        const err = form.querySelector('.form-error') || Object.assign(document.createElement('p'), { className: 'form-error' });
+        err.textContent = 'Erro ao enviar. Tente novamente ou contacte-nos por email.';
+        if (!form.contains(err)) submitBtn.before(err);
+    }
 });
