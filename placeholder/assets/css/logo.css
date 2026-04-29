@@ -4,7 +4,7 @@
     --pl-logo-name-size:        clamp(1.3rem, 4vw, 2rem);
     --pl-logo-name-tracking:    0.25em;
     --pl-logo-lab-size:         clamp(0.5rem, 1.3vw, 0.72rem);
-    --pl-logo-lab-offset:       1.1rem;
+    --pl-logo-lab-offset:       0.5rem;
     --pl-logo-tagline-size:     clamp(0.65rem, 1.6vw, 0.85rem);
     --pl-logo-tagline-tracking: 0.2em;
 }
@@ -84,7 +84,7 @@
     font-size: var(--pl-logo-lab-size);
     font-weight: 300;
     letter-spacing: 0.12em;
-    padding-bottom: var(--pl-logo-lab-offset);
+    padding-top: var(--pl-logo-lab-offset);
     margin-left: 0.3em;
     text-transform: uppercase;
     writing-mode: vertical-rl;

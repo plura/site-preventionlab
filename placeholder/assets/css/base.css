@@ -4,13 +4,12 @@
 
 :root {
     /* Colors */
-    --pl-color-accent:      #d4f000;
-    --pl-color-accent-dark: #b8d900;
-    --pl-color-bg:          #ede0cf;
-    --pl-color-dark:        #111111;
-    --pl-color-muted:       #8a7d72;
-    --pl-color-white:       #ffffff;
-    --pl-color-border:      #d5c8bb;
+    --pl-color-accent:  #d4f000;
+    --pl-color-bg:      #ede0cf;
+    --pl-color-dark:    #111111;
+    --pl-color-muted:   #8a7d72;
+    --pl-color-white:   #ffffff;
+    --pl-color-border:  #d5c8bb;
 
     /* Spacing */
     --pl-space-xs:  0.5rem;
@@ -31,11 +30,9 @@
     --pl-text-lg:   clamp(1rem,     2.5vw, 1.25rem);
 
     /* Typography — letter spacing */
-    --pl-tracking-sm:  0.06em;
-    --pl-tracking-md:  0.08em;
-    --pl-tracking-lg:  0.10em;
-    --pl-tracking-xl:  0.12em;
-    --pl-tracking-2xl: 0.22em;
+    --pl-tracking-sm: 0.06em;
+    --pl-tracking-lg: 0.10em;
+    --pl-tracking-xl: 0.12em;
 
     /* Transitions */
     --pl-transition:      0.2s;
