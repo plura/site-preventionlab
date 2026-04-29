@@ -70,7 +70,7 @@ form.addEventListener('submit', async function (e) {
         const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
         const json = await res.json();
 
-        if (json.success) {
+        if (res.ok && json.success) {
             form.querySelectorAll('.form-group, .btn-submit').forEach(el => el.style.display = 'none');
             const msg = Object.assign(document.createElement('p'), { className: 'form-success', textContent: 'Mensagem enviada. Entraremos em contacto em breve.' });
             form.appendChild(msg);
