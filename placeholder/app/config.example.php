@@ -7,7 +7,7 @@ return [
     'smtp_secure' => 'tls',        // 'tls' (STARTTLS/587) or 'ssl' (SMTPS/465)
 
     'from_email'  => '',           // sending address (usually same as smtp_user)
-    'from_name'   => 'PreventionLab',
+    'from_name'   => 'Prevention Lab',
 
     'to_email'    => '',           // where contact notifications go
     'to_name'     => 'Dra. Cristina Ferreira Leite',

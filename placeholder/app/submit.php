@@ -134,7 +134,7 @@ $sent = send_mail(
     $config,
     $config['to_email'],
     $config['to_name'],
-    'PreventionLab — novo contacto do site',
+    'Prevention Lab — novo contacto do site',
     build_email('Novo Contacto', $fields),
     $email,
     $name
@@ -147,7 +147,7 @@ if (!$sent) {
 }
 
 // —— Auto-reply to submitter —————————————————————————————————————————————————
-$intro = '<p class="email-intro">Olá ' . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . ', obrigado pelo seu contacto com a PreventionLab.'
+$intro = '<p class="email-intro">Olá ' . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . ', obrigado pelo seu contacto com a Prevention Lab.'
        . ' Recebemos a sua mensagem e entraremos em contacto brevemente.'
        . ' Em baixo encontra uma cópia da sua mensagem para os seus registos.</p>';
 
@@ -155,7 +155,7 @@ send_mail(
     $config,
     $email,
     $name,
-    'PreventionLab — recebemos o seu contacto',
+    'Prevention Lab — recebemos o seu contacto',
     build_email('Cópia da sua mensagem', $fields, $intro),
     $config['to_email'],
     $config['to_name']
