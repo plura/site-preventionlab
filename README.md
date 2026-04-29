@@ -6,11 +6,24 @@ Corporate website for **PreventionLab**, a health & wellness company focused on 
 
 ```
 /
-├── placeholder/        # Coming-soon landing page
-│   └── index.html
+├── placeholder/                    # Coming-soon landing page
+│   ├── index.html
+│   └── assets/
+│       ├── css/
+│       │   ├── base.css            # Reset, CSS vars (--pl-*), html/body
+│       │   ├── layout.css          # Page structure, canvas, divider
+│       │   └── components.css      # UI components (brand, modal, form, socials…)
+│       ├── icons/                  # Local SVG brand icons
+│       │   ├── facebook.svg
+│       │   ├── instagram.svg
+│       │   └── linkedin.svg
+│       └── js/
+│           ├── main.js             # Entry point (module)
+│           ├── modal.js            # Native <dialog> modal + focus trap
+│           └── particles.js        # Canvas particle background
 └── .vscode/
-    ├── sftp.json           # SFTP credentials (gitignored)
-    └── sftp.json.example   # Template — copy and fill in credentials
+    ├── sftp.json                   # SFTP credentials (gitignored)
+    └── sftp.json.example           # Template — copy and fill in credentials
 ```
 
 ## SFTP Setup
