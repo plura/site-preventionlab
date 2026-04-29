@@ -20,7 +20,7 @@
 .divider {
     width: 0;
     height: 1px;
-    background: var(--pl-color-green-light);
+    background: var(--pl-color-border);
     margin: var(--pl-space-xl) auto;
     opacity: .6;
 }

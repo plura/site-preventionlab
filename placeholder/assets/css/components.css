@@ -1,41 +1,3 @@
-/* ── Brand ── */
-.brand {
-    opacity: 0;
-    transform: translateY(-20px);
-}
-
-.brand-mark {
-    width: 56px;
-    height: 56px;
-    background: var(--pl-color-green);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto var(--pl-space-md);
-}
-
-.brand-mark svg {
-    color: var(--pl-color-white);
-}
-
-.brand-name {
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    font-weight: 400;
-    letter-spacing: var(--pl-tracking-md);
-    color: var(--pl-color-green);
-    text-transform: uppercase;
-}
-
-.brand-tagline {
-    margin-top: var(--pl-space-xs);
-    font-size: var(--pl-text-sm);
-    letter-spacing: var(--pl-tracking-2xl);
-    text-transform: uppercase;
-    color: var(--pl-color-muted);
-    font-family: var(--pl-font-sans);
-}
-
 /* ── Headline ── */
 .headline {
     opacity: 0;
@@ -44,6 +6,7 @@
 .headline h1 {
     font-size: clamp(1.1rem, 3vw, 1.5rem);
     font-weight: 400;
+    font-family: var(--pl-font-serif);
     color: var(--pl-color-dark);
     line-height: 1.6;
     max-width: 480px;
@@ -52,7 +15,6 @@
 
 .headline p {
     margin-top: var(--pl-space-sm);
-    font-family: var(--pl-font-sans);
     font-size: var(--pl-text-base);
     color: var(--pl-color-muted);
 }
@@ -65,7 +27,6 @@
     flex-wrap: wrap;
     gap: var(--pl-space-md);
     justify-content: center;
-    font-family: var(--pl-font-sans);
 }
 
 .contact a {
@@ -78,51 +39,51 @@
     transition: color var(--pl-transition);
 }
 
-.contact a:hover { color: var(--pl-color-green); }
+.contact a:hover { color: var(--pl-color-accent-dark); }
 
 .contact a svg {
     flex-shrink: 0;
-    color: var(--pl-color-green-light);
+    color: var(--pl-color-muted);
 }
 
 /* ── Buttons ── */
 .btn-cta {
     display: inline-block;
     padding: .85rem 2.2rem;
-    background: var(--pl-color-green);
-    color: var(--pl-color-white);
+    background: var(--pl-color-accent);
+    color: var(--pl-color-dark);
     font-family: var(--pl-font-sans);
     font-size: var(--pl-text-sm);
+    font-weight: 300;
     letter-spacing: var(--pl-tracking-xl);
     text-transform: uppercase;
     border: none;
-    border-radius: 2px;
     cursor: pointer;
     transition: background var(--pl-transition), transform var(--pl-transition-fast);
 }
 
 .btn-cta:hover {
-    background: var(--pl-color-green-dark);
+    background: var(--pl-color-accent-dark);
     transform: translateY(-1px);
 }
 
 .btn-submit {
     width: 100%;
     padding: .85rem;
-    background: var(--pl-color-green);
+    background: var(--pl-color-dark);
     color: var(--pl-color-white);
     font-family: var(--pl-font-sans);
     font-size: var(--pl-text-sm);
+    font-weight: 300;
     letter-spacing: var(--pl-tracking-xl);
     text-transform: uppercase;
     border: none;
-    border-radius: 2px;
     cursor: pointer;
     margin-top: var(--pl-space-xs);
     transition: background var(--pl-transition);
 }
 
-.btn-submit:hover { background: var(--pl-color-green-dark); }
+.btn-submit:hover { background: var(--pl-color-muted); }
 
 /* ── CTA wrap ── */
 .cta-wrap {
@@ -205,14 +166,14 @@ dialog[open]::backdrop {
 .modal-close:hover { color: var(--pl-color-dark); }
 
 dialog h2 {
+    font-family: var(--pl-font-serif);
     font-size: var(--pl-text-lg);
     font-weight: 400;
-    color: var(--pl-color-green);
+    color: var(--pl-color-dark);
     margin-bottom: .4rem;
 }
 
 dialog p {
-    font-family: var(--pl-font-sans);
     font-size: var(--pl-text-sm);
     color: var(--pl-color-muted);
     margin-bottom: 1.75rem;
@@ -225,7 +186,6 @@ dialog p {
 
 .form-group label {
     display: block;
-    font-family: var(--pl-font-sans);
     font-size: var(--pl-text-xs);
     letter-spacing: var(--pl-tracking-lg);
     text-transform: uppercase;
@@ -258,7 +218,7 @@ dialog p {
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-    border-bottom-color: var(--pl-color-green);
+    border-bottom-color: var(--pl-color-dark);
 }
 
 .form-group textarea { resize: none; min-height: 72px; }
@@ -278,7 +238,7 @@ dialog p {
     line-height: 1;
 }
 
-.socials a:hover { color: var(--pl-color-green); }
+.socials a:hover { color: var(--pl-color-dark); }
 
 .social-icon {
     display: block;
@@ -295,7 +255,6 @@ dialog p {
 .footer {
     opacity: 0;
     margin-top: var(--pl-space-2xl);
-    font-family: var(--pl-font-sans);
     font-size: var(--pl-text-xs);
     color: var(--pl-color-muted);
     letter-spacing: var(--pl-tracking-sm);

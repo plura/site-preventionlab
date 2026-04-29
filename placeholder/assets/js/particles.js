@@ -29,7 +29,7 @@ export function initParticles(canvasId) {
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(82,183,136,${this.o})`;
+            ctx.fillStyle = `rgba(212,240,0,${this.o})`;
             ctx.fill();
         }
     }

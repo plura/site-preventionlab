@@ -1,16 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Cardo&family=Outfit:wght@300;400&display=swap');
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
     /* Colors */
-    --pl-color-green:       #2d6a4f;
-    --pl-color-green-dark:  #235c42;
-    --pl-color-green-light: #52b788;
-    --pl-color-cream:       #f8f5f0;
-    --pl-color-dark:        #1a1a1a;
-    --pl-color-muted:       #6b7280;
+    --pl-color-accent:      #d4f000;
+    --pl-color-accent-dark: #b8d900;
+    --pl-color-bg:          #ede0cf;
+    --pl-color-dark:        #111111;
+    --pl-color-muted:       #8a7d72;
     --pl-color-white:       #ffffff;
-    --pl-color-border:      #e0dbd4;
-    --pl-color-overlay:     rgba(26, 26, 26, .55);
+    --pl-color-border:      #d5c8bb;
 
     /* Spacing */
     --pl-space-xs:  0.5rem;
@@ -21,8 +21,8 @@
     --pl-space-2xl: 3.5rem;
 
     /* Typography — families */
-    --pl-font-serif: 'Georgia', serif;
-    --pl-font-sans:  'Helvetica Neue', sans-serif;
+    --pl-font-serif: 'Cardo', serif;
+    --pl-font-sans:  'Outfit', sans-serif;
 
     /* Typography — sizes */
     --pl-text-xs:   clamp(0.7rem,   1.8vw, 0.775rem);
@@ -31,11 +31,11 @@
     --pl-text-lg:   clamp(1rem,     2.5vw, 1.25rem);
 
     /* Typography — letter spacing */
-    --pl-tracking-sm:   0.06em;
-    --pl-tracking-md:   0.08em;
-    --pl-tracking-lg:   0.10em;
-    --pl-tracking-xl:   0.12em;
-    --pl-tracking-2xl:  0.22em;
+    --pl-tracking-sm:  0.06em;
+    --pl-tracking-md:  0.08em;
+    --pl-tracking-lg:  0.10em;
+    --pl-tracking-xl:  0.12em;
+    --pl-tracking-2xl: 0.22em;
 
     /* Transitions */
     --pl-transition:      0.2s;
@@ -44,8 +44,8 @@
 
 html, body {
     height: 100%;
-    font-family: var(--pl-font-serif);
-    background: var(--pl-color-cream);
+    font-family: var(--pl-font-sans);
+    background: var(--pl-color-bg);
     color: var(--pl-color-dark);
     overflow-x: hidden;
 }

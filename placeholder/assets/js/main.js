@@ -1,10 +1,12 @@
 import { initParticles } from './particles.js';
+import { initLogo } from './logo.js';
 import './modal.js';
 
 const { gsap, lucide } = window;
 
 lucide.createIcons();
 initParticles('bg-canvas');
+initLogo();
 
 // ── GSAP entrance animations ──
 gsap.to('.brand',    { opacity: 1, y: 0, duration: 1,   ease: 'power3.out', delay: .3 });
