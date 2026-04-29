@@ -1,12 +1,12 @@
 /* ── Logo vars ── */
 :root {
-    --pl-logo-o-size:           clamp(7rem, 22vw, 14rem);
-    --pl-logo-name-size:        clamp(1.4rem, 5vw, 2.4rem);
-    --pl-logo-name-tracking:    clamp(0.06em, 1.2vw, 0.14em);
-    --pl-logo-lab-size:         clamp(0.5rem, 1.2vw, 0.72rem);
-    --pl-logo-lab-offset:       0.8rem;   /* push LAB up — L arm ≈ mid PREVENTION height */
-    --pl-logo-tagline-size:     clamp(0.55rem, 1.4vw, 0.75rem);
-    --pl-logo-tagline-tracking: 0.26em;
+    --pl-logo-o-size:           clamp(8rem, 24vw, 16rem);
+    --pl-logo-name-size:        clamp(1.4rem, 4.5vw, 2.2rem);
+    --pl-logo-name-tracking:    clamp(0.06em, 1.2vw, 0.13em);
+    --pl-logo-lab-size:         clamp(0.5rem, 1.2vw, 0.7rem);
+    --pl-logo-lab-offset:       1.1rem;   /* L arm ≈ mid PREVENTION cap-height; tune if needed */
+    --pl-logo-tagline-size:     clamp(0.65rem, 1.8vw, 0.85rem);
+    --pl-logo-tagline-tracking: 0.24em;
 }
 
 /* ── Logo root ── */
@@ -94,5 +94,5 @@
     letter-spacing: var(--pl-logo-tagline-tracking);
     text-transform: uppercase;
     margin-top: 0.8em;
-    color: var(--pl-logo-tagline-color, var(--pl-color-muted));
+    color: var(--pl-logo-tagline-color, var(--pl-color-dark));
 }
