@@ -69,6 +69,7 @@
     grid-area: 1 / 1;
     font-family: var(--pl-font-serif);
     line-height: 1;
+    will-change: transform;
 }
 
 .pl-logo__name-o--l { clip-path: inset(0 50% 0 0); }
