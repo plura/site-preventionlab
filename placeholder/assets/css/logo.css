@@ -1,12 +1,14 @@
 /* ── Logo vars ── */
 :root {
     --pl-logo-o-size:           clamp(8rem, 22vw, 13rem);
+    --pl-logo-o-left:           var(--pl-color-accent);
+    --pl-logo-o-right:          var(--pl-color-dark);
     --pl-logo-name-size:        clamp(1.3rem, 4vw, 2rem);
     --pl-logo-name-tracking:    0.25em;
     --pl-logo-lab-size:         clamp(0.5rem, 1.3vw, 0.72rem);
     --pl-logo-lab-offset:       1.1rem;
-    --pl-logo-tagline-size:     clamp(0.5rem, 1.3vw, 0.72rem);
-    --pl-logo-tagline-tracking: 0.3em;
+    --pl-logo-tagline-size:     clamp(0.65rem, 1.6vw, 0.85rem);
+    --pl-logo-tagline-tracking: 0.2em;
 }
 
 /* ── Logo root ── */
@@ -14,7 +16,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: var(--pl-logo-color, var(--pl-color-dark));
+    color: var(--pl-color-dark);
     user-select: none;
     opacity: 0;
 }
@@ -24,7 +26,6 @@
     display: grid;
     place-items: center;
     line-height: 1;
-    color: var(--pl-logo-accent, var(--pl-color-accent));
 }
 
 .pl-logo__o {
@@ -35,12 +36,21 @@
     line-height: 1;
 }
 
-.pl-logo__o--left  { clip-path: inset(0 50% 0 0); }
-.pl-logo__o--right { clip-path: inset(0 0 0 50%); }
+.pl-logo__o--left {
+    clip-path: inset(0 50% 0 0);
+    transform: translateX(-0.06em);
+    color: var(--pl-logo-o-left);
+}
+
+.pl-logo__o--right {
+    clip-path: inset(0 0 0 50%);
+    transform: translateX(0.06em);
+    color: var(--pl-logo-o-right);
+}
 
 /* ── Wordmark row ──
-   position:relative + inline-block so width = PREVENTION only.
-   LAB is absolute so it doesn't pull the wordmark off-center. */
+   inline-block so width = PREVENTION only.
+   LAB is absolute so it doesn't shift PREVENTION off-center. */
 .pl-logo__wordmark {
     position: relative;
     display: inline-block;
@@ -100,5 +110,5 @@
     letter-spacing: var(--pl-logo-tagline-tracking);
     text-transform: uppercase;
     margin-top: 0.8em;
-    color: var(--pl-logo-tagline-color, var(--pl-color-dark));
+    color: var(--pl-color-dark);
 }

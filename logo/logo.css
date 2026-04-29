@@ -5,33 +5,52 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #000;
+    color: #111;
     user-select: none;
 }
 
 /* ── Split O mark ── */
 .pl-logo__mark {
-    display: grid;        /* stack both spans in the same cell */
+    display: grid;
     place-items: center;
     line-height: 1;
-    margin-bottom: 0.05em;
 }
 
 .pl-logo__o {
-    grid-area: 1 / 1;     /* both spans overlap exactly */
+    grid-area: 1 / 1;
     font-family: 'Cardo', serif;
-    font-size: clamp(6rem, 18vw, 10rem);
+    font-size: clamp(8rem, 22vw, 13rem);
     font-weight: 400;
     line-height: 1;
 }
 
-.pl-logo__o--left  { clip-path: inset(0 50% 0 0); }
-.pl-logo__o--right { clip-path: inset(0 0 0 50%); }
+.pl-logo__o--left {
+    clip-path: inset(0 50% 0 0);
+    transform: translateX(-0.06em);
+    color: #d4f000;
+}
+
+.pl-logo__o--right {
+    clip-path: inset(0 0 0 50%);
+    transform: translateX(0.06em);
+    color: #111;
+}
 
 /* ── Wordmark row ── */
 .pl-logo__wordmark {
-    display: inline-flex;
-    align-items: stretch;
+    position: relative;
+    display: inline-block;
+    margin-top: 0.1em;
+}
+
+/* ── Name ── */
+.pl-logo__name {
+    display: block;
+    font-family: 'Cardo', serif;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
 }
 
 /* Split O inside the name */
@@ -50,35 +69,32 @@
 .pl-logo__name-o--l { clip-path: inset(0 50% 0 0); }
 .pl-logo__name-o--r { clip-path: inset(0 0 0 50%); }
 
-.pl-logo__name {
-    font-family: 'Cardo', serif;
-    font-size: clamp(1rem, 3.2vw, 1.6rem);
-    font-weight: 400;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-}
-
+/* ── LAB — absolute so it doesn't affect PREVENTION's centered width ── */
 .pl-logo__lab {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(0.42rem, 1vw, 0.58rem);
+    font-size: clamp(0.5rem, 1.3vw, 0.72rem);
     font-weight: 300;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
-    align-self: stretch;
-    display: flex;
-    align-items: center;
-    margin-left: 0.2em;
     padding-bottom: 1.1rem;
+    margin-left: 0.3em;
 }
 
 /* ── Tagline ── */
 .pl-logo__tagline {
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(0.42rem, 1.2vw, 0.58rem);
+    font-size: clamp(0.65rem, 1.6vw, 0.85rem);
     font-weight: 300;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    margin-top: 0.5em;
+    margin-top: 0.8em;
+    color: #111;
 }
