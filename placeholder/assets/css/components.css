@@ -22,7 +22,6 @@
 /* ── Contact ── */
 .contact {
     opacity: 0;
-    margin-top: var(--pl-space-xl);
     display: flex;
     flex-wrap: wrap;
     gap: var(--pl-space-md);
@@ -88,7 +87,6 @@
 /* ── CTA wrap ── */
 .cta-wrap {
     opacity: 0;
-    margin-top: var(--pl-space-xl);
 }
 
 /* ── Modal ── */
@@ -226,7 +224,6 @@ dialog p {
 /* ── Socials ── */
 .socials {
     opacity: 0;
-    margin-top: var(--pl-space-lg);
     display: flex;
     gap: var(--pl-space-md);
     justify-content: center;
@@ -254,7 +251,6 @@ dialog p {
 /* ── Footer ── */
 .footer {
     opacity: 0;
-    margin-top: var(--pl-space-2xl);
     font-size: var(--pl-text-xs);
     color: var(--pl-color-muted);
     letter-spacing: var(--pl-tracking-sm);
