@@ -1,4 +1,15 @@
-/* ── Logo component ── */
+/* ── Logo vars ── */
+:root {
+    --pl-logo-o-size:           clamp(7rem, 22vw, 14rem);
+    --pl-logo-name-size:        clamp(1.4rem, 5vw, 2.4rem);
+    --pl-logo-name-tracking:    clamp(0.06em, 1.2vw, 0.14em);
+    --pl-logo-lab-size:         clamp(0.5rem, 1.2vw, 0.72rem);
+    --pl-logo-lab-offset:       0.8rem;   /* push LAB up — L arm ≈ mid PREVENTION height */
+    --pl-logo-tagline-size:     clamp(0.55rem, 1.4vw, 0.75rem);
+    --pl-logo-tagline-tracking: 0.26em;
+}
+
+/* ── Logo root ── */
 .pl-logo {
     display: flex;
     flex-direction: column;
@@ -8,7 +19,7 @@
     opacity: 0;
 }
 
-/* ── Split O ── */
+/* ── Mark: split O ── */
 .pl-logo__mark {
     display: grid;
     place-items: center;
@@ -19,45 +30,57 @@
 .pl-logo__o {
     grid-area: 1 / 1;
     font-family: var(--pl-font-serif);
-    font-size: clamp(7rem, 22vw, 14rem);
+    font-size: var(--pl-logo-o-size);
     font-weight: 400;
     line-height: 1;
 }
 
-.pl-logo__o--left {
-    clip-path: inset(0 52% 0 0);
-    transform: translateX(-0.07em);
-}
+.pl-logo__o--left  { clip-path: inset(0 50% 0 0); }
+.pl-logo__o--right { clip-path: inset(0 0 0 50%); }
 
-.pl-logo__o--right {
-    clip-path: inset(0 0 0 52%);
-    transform: translateX(0.07em);
-}
-
-/* ── Wordmark ── */
+/* ── Wordmark row ── */
 .pl-logo__wordmark {
-    align-items: center;
+    align-items: flex-end;
     display: inline-flex;
     margin-top: 0.1em;
 }
 
+/* ── Name ── */
 .pl-logo__name {
     font-family: var(--pl-font-serif);
-    font-size: clamp(1.4rem, 5vw, 2.4rem);
+    font-size: var(--pl-logo-name-size);
     font-weight: 400;
-    letter-spacing: 0.22em;
+    letter-spacing: var(--pl-logo-name-tracking);
     text-transform: uppercase;
 }
 
+/* Split O inside the name — inline-grid stacks both chars in the same cell */
+.pl-logo__name-o {
+    display: inline-grid;
+    place-items: center;
+    vertical-align: baseline;
+}
+
+.pl-logo__name-o--l,
+.pl-logo__name-o--r {
+    grid-area: 1 / 1;
+    font-family: var(--pl-font-serif);
+}
+
+.pl-logo__name-o--l { clip-path: inset(0 50% 0 0); }
+.pl-logo__name-o--r { clip-path: inset(0 0 0 50%); }
+
+/* ── LAB ── */
 .pl-logo__lab {
-    align-self: stretch;
+    align-self: flex-end;
     display: flex;
     align-items: center;
     font-family: var(--pl-font-sans);
-    font-size: clamp(0.55rem, 1.4vw, 0.8rem);
+    font-size: var(--pl-logo-lab-size);
     font-weight: 300;
-    letter-spacing: 0.12em;
-    margin-left: 0.3em;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--pl-logo-lab-offset);
+    margin-left: 0.2em;
     text-transform: uppercase;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
@@ -66,9 +89,9 @@
 /* ── Tagline ── */
 .pl-logo__tagline {
     font-family: var(--pl-font-sans);
-    font-size: clamp(0.6rem, 1.6vw, 0.8rem);
+    font-size: var(--pl-logo-tagline-size);
     font-weight: 300;
-    letter-spacing: 0.28em;
+    letter-spacing: var(--pl-logo-tagline-tracking);
     text-transform: uppercase;
     margin-top: 0.8em;
     color: var(--pl-logo-tagline-color, var(--pl-color-muted));
