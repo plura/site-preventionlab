@@ -55,17 +55,20 @@
     text-transform: uppercase;
 }
 
-/* Split O inside the name — inline-grid stacks both chars in the same cell */
+/* Split O inside the name — inline-grid stacks both chars in the same cell.
+   letter-spacing: 0 prevents the inherited tracking from widening each span's
+   bounding box, which would shift the 50% clip-path off the glyph's visual centre. */
 .pl-logo__name-o {
     display: inline-grid;
-    place-items: center;
     vertical-align: baseline;
+    letter-spacing: 0;
 }
 
 .pl-logo__name-o--l,
 .pl-logo__name-o--r {
     grid-area: 1 / 1;
     font-family: var(--pl-font-serif);
+    line-height: 1;
 }
 
 .pl-logo__name-o--l { clip-path: inset(0 50% 0 0); }
