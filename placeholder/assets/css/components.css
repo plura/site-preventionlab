@@ -17,7 +17,7 @@
     transition: color var(--pl-transition);
 }
 
-.contact a:hover { color: var(--pl-color-accent); }
+.contact a:hover { color: color-mix(in srgb, var(--pl-color-accent) 80%, black); }
 
 .contact a svg {
     flex-shrink: 0;
@@ -61,7 +61,7 @@
     transition: background var(--pl-transition);
 }
 
-.btn-submit:hover { background: color-mix(in srgb, var(--pl-color-dark) 70%, white); }
+.btn-submit:hover { background: var(--pl-color-accent); color: var(--pl-color-dark); }
 
 /* ── CTA wrap ── */
 .cta-wrap {
