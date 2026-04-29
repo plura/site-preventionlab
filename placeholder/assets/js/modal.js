@@ -63,7 +63,7 @@ form.addEventListener('submit', async function (e) {
     submitBtn.textContent = 'A enviar…';
 
     try {
-        const res  = await fetch('./submit.php', { method: 'POST', body: data });
+        const res  = await fetch('./app/submit.php', { method: 'POST', body: data });
         const json = await res.json();
 
         if (res.ok && json.success) {
