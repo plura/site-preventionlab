@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Cardo&family=Outfit:wght@300;400&display=swap');
+
+/* ── Logo root ── */
+.pl-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #000;
+    user-select: none;
+}
+
+/* ── Split O mark ── */
+.pl-logo__mark {
+    display: grid;        /* stack both spans in the same cell */
+    place-items: center;
+    line-height: 1;
+    margin-bottom: 0.05em;
+}
+
+.pl-logo__o {
+    grid-area: 1 / 1;     /* both spans overlap exactly */
+    font-family: 'Cardo', serif;
+    font-size: clamp(6rem, 18vw, 10rem);
+    font-weight: 400;
+    line-height: 1;
+}
+
+.pl-logo__o--left  { clip-path: inset(0 50% 0 0); }
+.pl-logo__o--right { clip-path: inset(0 0 0 50%); }
+
+/* ── Wordmark row ── */
+.pl-logo__wordmark {
+    display: inline-flex;
+    align-items: stretch;
+}
+
+/* Split O inside the name */
+.pl-logo__name-o {
+    display: inline-grid;
+    place-items: center;
+    vertical-align: baseline;
+}
+
+.pl-logo__name-o--l,
+.pl-logo__name-o--r {
+    grid-area: 1 / 1;
+    font-family: 'Cardo', serif;
+}
+
+.pl-logo__name-o--l { clip-path: inset(0 50% 0 0); }
+.pl-logo__name-o--r { clip-path: inset(0 0 0 50%); }
+
+.pl-logo__name {
+    font-family: 'Cardo', serif;
+    font-size: clamp(1rem, 3.2vw, 1.6rem);
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+}
+
+.pl-logo__lab {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(0.42rem, 1vw, 0.58rem);
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    margin-left: 0.2em;
+    padding-bottom: 1.1rem;
+}
+
+/* ── Tagline ── */
+.pl-logo__tagline {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(0.42rem, 1.2vw, 0.58rem);
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-top: 0.5em;
+}

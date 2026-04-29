@@ -1,12 +1,12 @@
 /* ── Logo vars ── */
 :root {
-    --pl-logo-o-size:           clamp(8rem, 24vw, 16rem);
-    --pl-logo-name-size:        clamp(1.4rem, 4.5vw, 2.2rem);
-    --pl-logo-name-tracking:    clamp(0.06em, 1.2vw, 0.13em);
-    --pl-logo-lab-size:         clamp(0.5rem, 1.2vw, 0.7rem);
-    --pl-logo-lab-offset:       1.1rem;   /* L arm ≈ mid PREVENTION cap-height; tune if needed */
-    --pl-logo-tagline-size:     clamp(0.65rem, 1.8vw, 0.85rem);
-    --pl-logo-tagline-tracking: 0.24em;
+    --pl-logo-o-size:           clamp(6rem, 18vw, 10rem);
+    --pl-logo-name-size:        clamp(1rem, 3.2vw, 1.6rem);
+    --pl-logo-name-tracking:    0.25em;
+    --pl-logo-lab-size:         clamp(0.42rem, 1vw, 0.58rem);
+    --pl-logo-lab-offset:       1.1rem;
+    --pl-logo-tagline-size:     clamp(0.42rem, 1.2vw, 0.58rem);
+    --pl-logo-tagline-tracking: 0.3em;
 }
 
 /* ── Logo root ── */
@@ -40,7 +40,7 @@
 
 /* ── Wordmark row ── */
 .pl-logo__wordmark {
-    align-items: flex-end;
+    align-items: stretch;
     display: inline-flex;
     margin-top: 0.1em;
 }
@@ -72,14 +72,14 @@
 
 /* ── LAB ── */
 .pl-logo__lab {
-    align-self: flex-end;
+    align-self: stretch;
     display: flex;
     align-items: center;
     font-family: var(--pl-font-sans);
     font-size: var(--pl-logo-lab-size);
     font-weight: 300;
-    letter-spacing: 0.1em;
-    margin-bottom: var(--pl-logo-lab-offset);
+    letter-spacing: 0.12em;
+    padding-bottom: var(--pl-logo-lab-offset);
     margin-left: 0.2em;
     text-transform: uppercase;
     writing-mode: vertical-rl;
