@@ -28,28 +28,29 @@
     display: inline-block;
     padding: .55rem 1.8rem;
     background: transparent;
-    color: var(--pl-color-dark);
+    color: var(--pl-color-fg);
     font-family: var(--pl-font-sans);
     font-size: var(--pl-text-sm);
     font-weight: 300;
     letter-spacing: var(--pl-tracking-xl);
     text-transform: uppercase;
-    border: 1px solid var(--pl-color-dark);
+    border: 1px solid var(--pl-color-fg);
     cursor: pointer;
-    transition: background var(--pl-transition), border-color var(--pl-transition), transform var(--pl-transition-fast);
+    transition: background var(--pl-transition), border-color var(--pl-transition), color var(--pl-transition), transform var(--pl-transition-fast);
 }
 
 .btn-cta:hover {
     background: var(--pl-color-accent);
     border-color: var(--pl-color-accent);
+    color: var(--pl-color-bg);
     transform: translateY(-1px);
 }
 
 .btn-submit {
     width: 100%;
     padding: .85rem;
-    background: var(--pl-color-dark);
-    color: var(--pl-color-white);
+    background: var(--pl-color-fg);
+    color: var(--pl-color-bg);
     font-family: var(--pl-font-sans);
     font-size: var(--pl-text-sm);
     font-weight: 300;
@@ -58,10 +59,10 @@
     border: none;
     cursor: pointer;
     margin-top: var(--pl-space-xs);
-    transition: background var(--pl-transition);
+    transition: background var(--pl-transition), color var(--pl-transition);
 }
 
-.btn-submit:hover { background: var(--pl-color-accent); color: var(--pl-color-dark); }
+.btn-submit:hover { background: var(--pl-color-accent); color: var(--pl-color-bg); }
 
 /* ── CTA wrap ── */
 .cta-wrap {}
@@ -240,7 +241,7 @@ dialog p {
     line-height: 1;
 }
 
-.socials a:hover { color: var(--pl-color-dark); }
+.socials a:hover { color: var(--pl-color-fg); }
 
 .social-icon {
     display: block;

@@ -5,11 +5,12 @@
 :root {
     /* Colors */
     --pl-color-accent:  #d4f000;
-    --pl-color-bg:      #ede0cf;
+    --pl-color-bg:      #252920;
+    --pl-color-fg:      #e8e2d4;
     --pl-color-dark:    #111111;
-    --pl-color-muted:   #8a7d72;
+    --pl-color-muted:   #8a9478;
     --pl-color-white:   #ffffff;
-    --pl-color-border:  #d5c8bb;
+    --pl-color-border:  #3a4033;
 
     /* Spacing */
     --pl-space-xs:  0.5rem;
@@ -43,6 +44,6 @@ html, body {
     height: 100%;
     font-family: var(--pl-font-sans);
     background: var(--pl-color-bg);
-    color: var(--pl-color-dark);
+    color: var(--pl-color-fg);
     overflow-x: hidden;
 }
