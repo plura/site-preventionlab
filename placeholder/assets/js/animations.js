@@ -1,6 +1,6 @@
 import { initLogo } from './logo.js';
 
-export function initAnimations() {
+export function initAnimations(onLogoSequenceComplete = () => {}) {
     const { gsap } = window;
 
     const layoutEls = ['#divider', '.contact', '.cta-wrap', '.socials', '.footer'];
@@ -27,6 +27,8 @@ export function initAnimations() {
 
         // FLIP: push logo back to its centred visual position, then animate to natural position
         gsap.set('.pl-logo', { y: centredTop - finalTop });
+
+        onLogoSequenceComplete();
 
         const tl = gsap.timeline();
 

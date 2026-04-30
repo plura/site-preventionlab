@@ -7,6 +7,9 @@ const ANIMATIONS = true;
 const { lucide } = window;
 
 lucide.createIcons();
-initParticles('bg-canvas');
 
-if (ANIMATIONS) initAnimations();
+if (ANIMATIONS) {
+    initAnimations(() => initParticles('bg-canvas'));
+} else {
+    initParticles('bg-canvas');
+}
