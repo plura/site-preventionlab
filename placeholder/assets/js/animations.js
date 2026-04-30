@@ -27,11 +27,11 @@ export function initAnimations() {
 
         const tl = gsap.timeline();
 
-        tl.to('.pl-logo',  { y: 0, duration: 0.7, ease: 'power2.inOut' });
-        tl.to('#divider',  { width: 80, duration: 0.8, ease: 'power2.inOut' }, '-=0.3');
-        tl.fromTo('.contact', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '-=0.3');
-        tl.to('.cta-wrap', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.2');
-        tl.to('.socials',  { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.2');
-        tl.to('.footer',   { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.2');
+        tl.to('.pl-logo',  { y: 0, duration: 1.2, ease: 'sine.inOut' });
+        tl.to('#divider',  { width: 80, duration: 1.0, ease: 'sine.inOut' }, '-=0.4');
+        tl.fromTo('.contact', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.8, ease: 'sine.out' }, '-=0.3');
+        tl.to('.cta-wrap', { opacity: 1, duration: 0.7, ease: 'sine.out' }, '-=0.2');
+        tl.to('.socials',  { opacity: 1, duration: 0.7, ease: 'sine.out' }, '-=0.2');
+        tl.to('.footer',   { opacity: 1, duration: 0.7, ease: 'sine.out' }, '-=0.2');
     });
 }
