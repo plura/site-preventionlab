@@ -56,12 +56,12 @@
 }
 
 /* Split O inside the name — inline-grid stacks both chars in the same cell.
-   letter-spacing: 0 prevents the inherited tracking from widening each span's
-   bounding box, which would shift the 50% clip-path off the glyph's visual centre. */
+   letter-spacing: 0 on the spans (not the container) prevents inherited tracking
+   from widening each span's bounding box and shifting the 50% clip-path off-centre,
+   while allowing the container to carry its normal trailing space before "N". */
 .pl-logo__name-o {
     display: inline-grid;
     vertical-align: baseline;
-    letter-spacing: 0;
 }
 
 .pl-logo__name-o--l,
@@ -69,6 +69,7 @@
     grid-area: 1 / 1;
     font-family: var(--pl-font-serif);
     line-height: 1;
+    letter-spacing: 0;
     will-change: transform;
 }
 

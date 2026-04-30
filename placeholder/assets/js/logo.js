@@ -3,7 +3,7 @@ export function initLogo() {
     const accent = getComputedStyle(document.documentElement)
         .getPropertyValue('--pl-color-accent').trim();
 
-    gsap.set('.pl-logo__mark',    { opacity: 0, y: 12 });
+    gsap.set('.pl-logo__mark',    { opacity: 0, y: 20 });
     gsap.set('.pl-logo__name',    { opacity: 0 });
     gsap.set('.pl-logo__lab',     { opacity: 0 });
     gsap.set('.pl-logo__tagline', { opacity: 0 });
