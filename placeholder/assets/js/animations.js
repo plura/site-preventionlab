@@ -5,6 +5,9 @@ export function initAnimations() {
 
     const layoutEls = ['#divider', '.contact', '.cta-wrap', '.socials', '.footer'];
 
+    // Particles run from the start but stay hidden — they'll be mid-flight when revealed
+    gsap.set('#bg-canvas', { opacity: 0 });
+
     // Remove non-logo elements from the flex layout so the logo starts visually centred
     gsap.set(layoutEls, { display: 'none' });
 
@@ -27,7 +30,8 @@ export function initAnimations() {
 
         const tl = gsap.timeline();
 
-        tl.to('.pl-logo',  { y: 0, duration: 1.2, ease: 'sine.inOut' });
+        tl.to('#bg-canvas', { opacity: 1, duration: 1.5, ease: 'sine.out' }, 0);
+        tl.to('.pl-logo',  { y: 0, duration: 1.2, ease: 'sine.inOut' }, 0);
         tl.to('#divider',  { width: 80, duration: 1.0, ease: 'sine.inOut' }, '-=0.4');
         tl.fromTo('.contact', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.8, ease: 'sine.out' }, '-=0.3');
         tl.to('.cta-wrap', { opacity: 1, duration: 0.7, ease: 'sine.out' }, '-=0.2');
