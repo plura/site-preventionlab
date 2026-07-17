@@ -8,19 +8,60 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://preventionlab.pt/">
 
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicons/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#252920">
+
     <!-- Open Graph -->
     <meta property="og:type"        content="website">
     <meta property="og:url"         content="https://preventionlab.pt/">
+    <meta property="og:site_name"   content="Prevention Lab">
     <meta property="og:title"       content="Prevention Lab | Medicina Preventiva, Porto">
     <meta property="og:description" content="Medicina preventiva, gestão de stress, qualidade do sono e longevidade, no Porto. Dra. Cristina Ferreira Leite.">
     <meta property="og:locale"      content="pt_PT">
     <meta property="og:image"       content="https://preventionlab.pt/assets/images/og.png">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt"    content="Prevention Lab — Medicina Preventiva, Porto">
 
     <!-- Twitter / X -->
     <meta name="twitter:card"        content="summary_large_image">
     <meta name="twitter:title"       content="Prevention Lab | Medicina Preventiva, Porto">
     <meta name="twitter:description" content="Medicina preventiva, gestão de stress, qualidade do sono e longevidade, no Porto. Dra. Cristina Ferreira Leite.">
     <meta name="twitter:image"       content="https://preventionlab.pt/assets/images/og.png">
+    <meta name="twitter:image:alt"   content="Prevention Lab — Medicina Preventiva, Porto">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MedicalBusiness",
+        "name": "Prevention Lab",
+        "url": "https://preventionlab.pt/",
+        "image": "https://preventionlab.pt/assets/images/og.png",
+        "description": "Clínica de medicina preventiva no Porto, especializada em gestão de stress, qualidade do sono, longevidade e programas de bem-estar corporativo.",
+        "telephone": "+351912198818",
+        "email": "info@preventionlab.pt",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Rua Padre Himalaya 50F, Escritório 8",
+            "addressLocality": "Porto",
+            "postalCode": "4100-553",
+            "addressCountry": "PT"
+        },
+        "employee": {
+            "@type": "Person",
+            "name": "Cristina Ferreira Leite",
+            "jobTitle": "Médica"
+        },
+        "sameAs": [
+            "https://www.instagram.com/dracristinaleite_prevlab/",
+            "https://www.facebook.com/Prevention.Lab.Porto/",
+            "https://www.linkedin.com/company/prevention-lab-porto/"
+        ]
+    }
+    </script>
 
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/layout.css">
@@ -32,6 +73,9 @@
 <canvas id="bg-canvas"></canvas>
 
 <div class="page">
+
+    <h1 class="sr-only">Prevention Lab — Medicina Preventiva, Gestão de Stress, Sono e Longevidade no Porto</h1>
+    <p class="sr-only">A Prevention Lab é uma clínica de medicina preventiva no Porto, liderada pela Dra. Cristina Ferreira Leite, especializada em gestão de stress, qualidade do sono, longevidade e programas de bem-estar corporativo.</p>
 
     <div class="pl-logo">
         <div class="pl-logo__mark" aria-hidden="true">
@@ -120,8 +164,8 @@
     </div>
 </dialog>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
 <script type="module" src="assets/js/main.js"></script>
 </body>
 </html>
