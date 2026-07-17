@@ -1,0 +1,29 @@
+<mjml>
+<mj-head>
+	<mj-title>Novo Contacto</mj-title>
+	<mj-preview>Novo Contacto — Prevention Lab</mj-preview>
+	<mj-include path="../_partials/_head.mjml" />
+</mj-head>
+<mj-body>
+	<mj-wrapper mj-class="page-frame" css-class="page-frame">
+
+		<mj-include path="../_partials/_header.mjml" />
+
+		<mj-section mj-class="body-card" css-class="body-card">
+			<mj-column>
+				<mj-table cellpadding="0" cellspacing="0" width="100%">
+					<tr>
+						<td class="heading-cell" style="width:70%;padding:0 0 20px;text-align:left" valign="top">Novo contacto</td>
+						<td class="date-cell" style="width:30%;padding:0 0 20px;text-align:right" valign="top">%date%</td>
+					</tr>
+				</mj-table>
+				<mj-include path="../_partials/_fields.mjml" />
+			</mj-column>
+		</mj-section>
+
+		<mj-include path="../_partials/_footer.mjml" />
+		<mj-include path="../_partials/_credit.mjml" />
+
+	</mj-wrapper>
+</mj-body>
+</mjml>

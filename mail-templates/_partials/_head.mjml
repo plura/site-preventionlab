@@ -1,0 +1,56 @@
+<mj-attributes>
+	<mj-all font-family="Helvetica Neue, Helvetica, Arial, sans-serif" />
+	<mj-text font-size="14px" line-height="1.7" color="#111111" />
+	<mj-body width="560px" background-color="#e8e2d4" />
+
+	<mj-class name="page-frame" background-color="#e8e2d4" padding="48px 16px" />
+	<mj-class name="header-pad" background-color="#e8e2d4" padding="0" />
+	<mj-class name="footer-pad" background-color="#e8e2d4" padding="28px 48px 20px" />
+	<mj-class name="credit-pad" background-color="#e8e2d4" padding="0 48px 32px" />
+	<mj-class name="body-card" background-color="#ffffff" padding="36px 48px 48px" />
+	<mj-class name="footer-column" border-top="1px solid #d5c8bb" padding-top="20px" />
+
+	<mj-class name="logo-image" width="175px" padding="0 0 28px" />
+	<mj-class name="accent-divider" border-color="#d4f000" border-width="3px" padding="0" />
+
+	<mj-class name="heading" font-family="Georgia, 'Times New Roman', serif" font-size="22px" font-weight="400" color="#111111" line-height="1.3" align="left" />
+	<mj-class name="date-text" font-size="10px" letter-spacing="0.05em" text-transform="uppercase" color="#8a7d72" align="right" />
+	<mj-class name="intro-text" font-size="13px" line-height="1.8" padding="0 0 32px" />
+	<mj-class name="urgent-text" font-size="13px" line-height="1.8" align="center" padding="20px 0 0" />
+	<mj-class name="field-divider" border-color="#e8e2d4" border-width="1px" padding="0 0 20px" />
+	<mj-class name="footer-name" align="center" font-size="11px" font-weight="bold" letter-spacing="0.2em" text-transform="uppercase" color="#111111" padding="0 0 6px" />
+	<mj-class name="footer-text" align="center" font-size="11px" color="#8a7d72" letter-spacing="0.05em" line-height="1.9" padding="0 0 6px" />
+	<mj-class name="credit-text" align="center" font-size="10px" color="#b8aa9e" letter-spacing="0.05em" />
+	<mj-class name="cta-button" background-color="#111111" color="#e8e2d4" font-size="12px" font-weight="300" letter-spacing="0.1em" text-transform="uppercase" border-radius="0" align="center" padding="24px 0 0" inner-padding="14px 32px" />
+</mj-attributes>
+
+<mj-style inline="inline">
+	.footer-link { color: #8a7d72; text-decoration: none; }
+	.credit-link { color: #b8aa9e; text-decoration: none; font-weight: bold; }
+	.urgent-link { color: #111111; font-weight: bold; text-decoration: underline; text-decoration-color: #d4f000; }
+	.message-quote { background: #e8e2d4; border-left: 3px solid #d4f000; padding: 16px 20px; font-size: 14px; line-height: 1.7; color: #111111; }
+	.heading-cell { font-family: Georgia, 'Times New Roman', serif; font-size: 22px; font-weight: 400; color: #111111; line-height: 1.3; }
+	.date-cell { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: #8a7d72; }
+	.field-label { width: 30%; vertical-align: top; padding: 14px 16px 14px 0; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #8a7d72; }
+	.field-value { width: 70%; vertical-align: top; padding: 14px 0; font-size: 14px; line-height: 1.7; color: #111111; }
+	.message-label { padding: 0 0 4px; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #8a7d72; }
+</mj-style>
+
+<mj-style>
+	@media only screen and (max-width: 480px) {
+		.page-frame > table > tbody > tr > td { padding: 24px 12px !important; }
+		.body-card > table > tbody > tr > td { padding: 28px 24px 32px !important; }
+		.footer-pad > table > tbody > tr > td { padding: 24px 24px 16px !important; }
+		.credit-pad > table > tbody > tr > td { padding: 0 24px 24px !important; }
+		.field-label, .field-value { display: block !important; width: 100% !important; padding: 0 !important; }
+		.field-label { padding: 0 0 4px !important; }
+		.field-value { padding: 0 0 20px !important; }
+	}
+</mj-style>
+
+<mj-raw>
+	<meta name="x-apple-disable-message-reformatting">
+	<meta name="color-scheme" content="light">
+	<meta name="supported-color-schemes" content="light">
+	<meta name="format-detection" content="telephone=no, email=no, address=no">
+</mj-raw>

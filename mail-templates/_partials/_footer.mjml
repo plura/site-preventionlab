@@ -1,0 +1,17 @@
+<mj-section mj-class="footer-pad" css-class="footer-pad">
+	<mj-column mj-class="footer-column">
+		<mj-text mj-class="footer-name" padding="0 0 20px">Prevention Lab</mj-text>
+		<mj-text mj-class="footer-text" padding="0 0 20px">
+			<a href="mailto:info@preventionlab.pt" class="footer-link">info&zwnj;@preventionlab&zwnj;.pt</a><br />
+			<a href="tel:+351912198818" class="footer-link">+351&zwnj; 912&zwnj; 198&zwnj; 818</a><br />
+			<a href="https://maps.app.goo.gl/Qp4Q44zj1VSz5sjM7" class="footer-link">Rua Padre Himalaya 50F, Escritório 8, 4100-553 Porto</a>
+		</mj-text>
+		<mj-text mj-class="footer-text" padding="0">
+			<a href="https://www.instagram.com/dracristinaleite_prevlab/" class="footer-link">Instagram</a>
+			&nbsp;&middot;&nbsp;
+			<a href="https://www.facebook.com/Prevention.Lab.Porto/" class="footer-link">Facebook</a>
+			&nbsp;&middot;&nbsp;
+			<a href="https://www.linkedin.com/company/prevention-lab-porto/" class="footer-link">LinkedIn</a>
+		</mj-text>
+	</mj-column>
+</mj-section>

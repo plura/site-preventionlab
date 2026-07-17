@@ -59,6 +59,18 @@ form.addEventListener('submit', async function (e) {
 
     const data = new FormData(form);
 
+    const interest = form.querySelector('[name="interest"]');
+    if (interest?.value) {
+        data.set('interest', interest.selectedOptions[0].text);
+    }
+
+    const labels = {};
+    form.querySelectorAll('[name]').forEach(field => {
+        const label = form.querySelector(`label[for="${field.id}"]`);
+        if (label) labels[field.name] = label.textContent.replace(/\s*\(opcional\)\s*$/i, '').trim();
+    });
+    data.set('labels', JSON.stringify(labels));
+
     submitBtn.disabled = true;
     submitBtn.textContent = 'A enviar…';
 

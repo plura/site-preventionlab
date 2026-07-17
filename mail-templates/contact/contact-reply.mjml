@@ -1,0 +1,28 @@
+<mjml>
+<mj-head>
+	<mj-title>Obrigada pelo seu contacto</mj-title>
+	<mj-preview>Obrigada pelo seu contacto — Prevention Lab</mj-preview>
+	<mj-include path="../_partials/_head.mjml" />
+</mj-head>
+<mj-body>
+	<mj-wrapper mj-class="page-frame" css-class="page-frame">
+
+		<mj-include path="../_partials/_header.mjml" />
+
+		<mj-section mj-class="body-card" css-class="body-card">
+			<mj-column>
+				<mj-text mj-class="heading" align="center" padding="0 0 20px">Obrigada pelo seu contacto</mj-text>
+				<mj-text mj-class="intro-text" align="center">Olá %name%, recebemos a sua mensagem sobre %interest%. A Dra. Cristina Ferreira Leite irá analisá-la e entraremos em contacto consigo brevemente.</mj-text>
+				<mj-raw><tr><td class="message-quote">%message%</td></tr></mj-raw>
+				<mj-divider mj-class="field-divider" padding="20px 0 0" />
+				<mj-text mj-class="urgent-text">Se o assunto for urgente, pode contactar-nos diretamente através do <a href="tel:+351912198818" class="urgent-link">+351&zwnj; 912&zwnj; 198&zwnj; 818</a>.</mj-text>
+				<mj-button mj-class="cta-button" href="https://preventionlab.pt/">Visitar o site</mj-button>
+			</mj-column>
+		</mj-section>
+
+		<mj-include path="../_partials/_footer.mjml" />
+		<mj-include path="../_partials/_credit.mjml" />
+
+	</mj-wrapper>
+</mj-body>
+</mjml>

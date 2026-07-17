@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+date_default_timezone_set('Europe/Lisbon');
+
 header('Content-Type: application/json; charset=UTF-8');
 
 // Only accept POST
@@ -32,78 +34,67 @@ if (!empty($_POST['botcheck'])) {
     exit;
 }
 
-// —— Sanitize ————————————————————————————————————————————————————————————————
-$name     = strip_tags(trim($_POST['name']     ?? ''));
-$email    = trim($_POST['email']    ?? '');
-$phone    = strip_tags(trim($_POST['phone']    ?? ''));
-$interest = strip_tags(trim($_POST['interest'] ?? ''));
-$message  = strip_tags(trim($_POST['message']  ?? ''));
+// —— Collect submitted fields (agnostic to whatever the form sends) ———————————
+// Human-readable field labels are supplied by the form itself (from its <label> elements),
+// not hardcoded here — keeps this handler agnostic to whatever fields a given form has.
+$labels = [];
+if (!empty($_POST['labels']) && is_string($_POST['labels'])) {
+    $decoded = json_decode($_POST['labels'], true);
+    if (is_array($decoded)) {
+        foreach ($decoded as $key => $label) {
+            if (is_string($key) && is_string($label)) {
+                $labels[$key] = strip_tags(trim($label));
+            }
+        }
+    }
+}
+
+$data = [];
+foreach ($_POST as $key => $value) {
+    if ($key === 'botcheck' || $key === 'labels' || !is_string($value)) {
+        continue;
+    }
+    $data[$key] = strip_tags(trim($value));
+}
 
 // —— Validate ————————————————————————————————————————————————————————————————
-if (!$name || !$email) {
+if (empty($data['name']) || empty($data['email'])) {
     http_response_code(422);
     echo json_encode(['success' => false, 'message' => 'Por favor preencha os campos obrigatórios.']);
     exit;
 }
 
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
     http_response_code(422);
     echo json_encode(['success' => false, 'message' => 'Por favor introduza um endereço de email válido.']);
     exit;
 }
 
-$email = filter_var($email, FILTER_SANITIZE_EMAIL);
+$data['email'] = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
 
-// —— Interest label ——————————————————————————————————————————————————————————
-$interest_labels = [
-    'stress'    => 'Gestão de Stress',
-    'sleep'     => 'Qualidade do Sono',
-    'longevity' => 'Longevidade',
-    'corporate' => 'Programa Corporativo',
-    'other'     => 'Outro',
-];
-$interest_label = $interest_labels[$interest] ?? '';
+// —— Build email body ———————————————————————————————————————————————————————
+function build_body(array $data, ?string $template_path, array $labels = []): string {
+    $template = $template_path ? @file_get_contents($template_path) : false;
 
-// —— Build fields rows ———————————————————————————————————————————————————————
-$fields = array_filter([
-    ['label' => 'Nome',      'value' => $name],
-    ['label' => 'Email',     'value' => $email],
-    ['label' => 'Telefone',  'value' => $phone],
-    ['label' => 'Interesse', 'value' => $interest_label],
-    ['label' => 'Mensagem',  'value' => $message],
-], fn($f) => $f['value'] !== '');
+    if ($template === false) {
+        $lines = [];
+        foreach ($data as $key => $value) {
+            if ($value === '') {
+                continue;
+            }
+            $lines[] = ($labels[$key] ?? ucfirst($key)) . ': ' . $value;
+        }
+        return implode("\n", $lines);
+    }
 
-function build_fields_html(array $fields): string {
-    $html = '';
-    foreach ($fields as $field) {
-        $label  = htmlspecialchars($field['label'], ENT_QUOTES, 'UTF-8');
-        $value  = nl2br(htmlspecialchars($field['value'], ENT_QUOTES, 'UTF-8'));
-        $html  .= "
-            <tr>
-                <td class=\"label-cell\">{$label}</td>
-                <td class=\"value-cell\">{$value}</td>
-            </tr>";
+    $html = str_replace(['%year%', '%date%'], [date('Y'), date('d/m/Y H:i')], $template);
+    foreach ($data as $key => $value) {
+        $html = str_replace('%' . $key . '%', nl2br(htmlspecialchars($value, ENT_QUOTES, 'UTF-8')), $html);
     }
     return $html;
 }
 
-function build_email(string $form_name, array $fields, string $intro = ''): string {
-    $template = __DIR__ . '/templates/email-contact.html';
-    $html     = file_get_contents($template);
-
-    return str_replace(
-        ['%FORM_NAME%', '%INTRO%', '%FIELDS%', '%YEAR%'],
-        [
-            htmlspecialchars($form_name, ENT_QUOTES, 'UTF-8'),
-            $intro,
-            build_fields_html($fields),
-            gmdate('Y'),
-        ],
-        $html
-    );
-}
-
-function send_mail(array $cfg, string $to_email, string $to_name, string $subject, string $body, string $reply_email = '', string $reply_name = ''): bool {
+function send_mail(array $cfg, string $to_email, string $to_name, string $subject, string $body, bool $is_html, string $reply_email = '', string $reply_name = ''): bool {
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
@@ -122,7 +113,7 @@ function send_mail(array $cfg, string $to_email, string $to_name, string $subjec
             $mail->addReplyTo($reply_email, $reply_name);
         }
 
-        $mail->isHTML(true);
+        $mail->isHTML($is_html);
         $mail->Subject = $subject;
         $mail->Body    = $body;
 
@@ -135,14 +126,16 @@ function send_mail(array $cfg, string $to_email, string $to_name, string $subjec
 }
 
 // —— Notification to clinic ——————————————————————————————————————————————————
+$template = __DIR__ . '/templates/contact.html';
 $sent = send_mail(
     $config,
     $config['to_email'],
     $config['to_name'],
     'Prevention Lab — novo contacto do site',
-    build_email('Novo Contacto', $fields),
-    $email,
-    $name
+    build_body($data, $template, $labels),
+    file_exists($template),
+    $data['email'],
+    $data['name']
 );
 
 if (!$sent) {
@@ -152,16 +145,14 @@ if (!$sent) {
 }
 
 // —— Auto-reply to submitter —————————————————————————————————————————————————
-$intro = '<p class="email-intro">Olá ' . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . ', obrigado pelo seu contacto com a Prevention Lab.'
-       . ' Recebemos a sua mensagem e entraremos em contacto brevemente.'
-       . ' Em baixo encontra uma cópia da sua mensagem para os seus registos.</p>';
-
+$reply_template = __DIR__ . '/templates/contact-reply.html';
 send_mail(
     $config,
-    $email,
-    $name,
+    $data['email'],
+    $data['name'],
     'Prevention Lab — recebemos o seu contacto',
-    build_email('Cópia da sua mensagem', $fields, $intro),
+    build_body($data, $reply_template, $labels),
+    file_exists($reply_template),
     $config['to_email'],
     $config['to_name']
 );
