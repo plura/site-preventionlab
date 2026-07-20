@@ -3,7 +3,11 @@ import { initLogo } from './logo.js';
 export function initAnimations(onLogoSequenceComplete = () => {}) {
     const { gsap } = window;
 
-    const layoutEls = ['#divider', '.contact', '.cta-wrap', '.socials', '.footer'];
+    // .footer is now a semantic <footer> wrapper around .contact/.cta-wrap/.socials/.legal
+    // (see index.html) rather than its own text node — animating it directly would gate the
+    // visibility of everything nested inside via CSS opacity compounding, collapsing the
+    // stagger. .legal (holding what .footer used to contain) takes its place in the sequence.
+    const layoutEls = ['#divider', '.contact', '.cta-wrap', '.socials', '.legal'];
 
     // Particles run from the start but stay hidden — they'll be mid-flight when revealed
     gsap.set('#bg-canvas', { opacity: 0 });
@@ -38,6 +42,6 @@ export function initAnimations(onLogoSequenceComplete = () => {}) {
         tl.fromTo('.contact', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.8, ease: 'sine.out' }, '-=0.3');
         tl.to('.cta-wrap', { opacity: 1, duration: 0.7, ease: 'sine.out' }, '-=0.2');
         tl.to('.socials',  { opacity: 1, duration: 0.7, ease: 'sine.out' }, '-=0.2');
-        tl.to('.footer',   { opacity: 1, duration: 0.7, ease: 'sine.out' }, '-=0.2');
+        tl.to('.legal',    { opacity: 1, duration: 0.7, ease: 'sine.out' }, '-=0.2');
     });
 }

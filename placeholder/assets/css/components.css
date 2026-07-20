@@ -162,10 +162,10 @@ dialog p {
 
 .form-group label {
     display: block;
-    font-size: var(--pl-text-xs);
+    font-size: 0.65rem;
     letter-spacing: var(--pl-tracking-lg);
     text-transform: uppercase;
-    color: var(--pl-color-muted);
+    color: var(--pl-color-border);
     margin-bottom: .35rem;
 }
 
@@ -175,7 +175,7 @@ dialog p {
     width: 100%;
     padding: .4rem 0;
     border: none;
-    border-bottom: 1px solid var(--pl-color-border);
+    border-bottom: 1px solid var(--pl-color-muted);
     border-radius: 0;
     font-family: var(--pl-font-sans);
     font-size: var(--pl-text-base);
@@ -188,7 +188,7 @@ dialog p {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-    color: var(--pl-color-border);
+    color: var(--pl-color-muted);
 }
 
 .form-group input:focus,
@@ -197,7 +197,7 @@ dialog p {
     border-bottom-color: var(--pl-color-dark);
 }
 
-.form-group textarea { resize: none; min-height: 72px; }
+.form-group textarea { resize: none; min-height: 120px; }
 
 .form-group select {
     cursor: pointer;
@@ -219,6 +219,7 @@ dialog p {
     text-align: center;
     padding: 2rem 0 1rem;
     letter-spacing: var(--pl-tracking-sm);
+    text-wrap: pretty;
 }
 
 .form-error {
@@ -226,6 +227,7 @@ dialog p {
     color: #b04040;
     margin-bottom: 0.75rem;
     letter-spacing: var(--pl-tracking-sm);
+    text-wrap: pretty;
 }
 
 /* ── Socials ── */
@@ -256,7 +258,28 @@ dialog p {
 
 /* ── Footer ── */
 .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--pl-space-xl);
+}
+
+.legal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--pl-space-sm);
     font-size: var(--pl-text-xs);
     color: var(--pl-color-muted);
     letter-spacing: var(--pl-tracking-sm);
 }
+
+.legal p { margin: 0; }
+
+.footer-credit a {
+    color: var(--pl-color-muted);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.footer-credit a:hover { color: var(--pl-color-fg); }
