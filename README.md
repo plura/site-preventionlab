@@ -2,6 +2,16 @@
 
 Corporate website for **Prevention Lab**, a preventive medicine clinic focused on stress, sleep, and longevity. Porto.
 
+> Structural parity with [site-placeholder-starter](https://github.com/plura/site-placeholder-starter)
+> as of commit `248ab80` (2026-07-21) — not a fork (this project independently converged with
+> the starter's conventions; it's actually one of the two original sources it was extracted
+> from), but see that commit's message for exactly what was brought in sync (structural/quality
+> fixes only; the starter's newer mailing-list and dark/light mode features were deliberately
+> not brought in here). Note: this repo also has an unrelated, unfinished, uncommitted
+> migration of `mail-templates/` from raw `<mj-table>` to `mj-section`/`mj-column` sitting in
+> the working tree as of that date — not part of the sync above, worth finishing or committing
+> separately.
+
 ## Structure
 
 ```
