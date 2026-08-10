@@ -1,27 +1,62 @@
-<mj-table cellpadding="0" cellspacing="0" width="100%">
-<tr>
-	<td class="field-label" valign="top">Nome</td>
-	<td class="field-value" valign="top">%name%</td>
-</tr>
-<tr><td colspan="2" style="padding:0 0 20px"><div style="border-top:1px solid #e8e2d4;font-size:1px;line-height:1px">&nbsp;</div></td></tr>
-<tr>
-	<td class="field-label" valign="top">Email</td>
-	<td class="field-value" valign="top">%email%</td>
-</tr>
-<tr><td colspan="2" style="padding:0 0 20px"><div style="border-top:1px solid #e8e2d4;font-size:1px;line-height:1px">&nbsp;</div></td></tr>
-<tr>
-	<td class="field-label" valign="top">Telefone</td>
-	<td class="field-value" valign="top">%phone%</td>
-</tr>
-<tr><td colspan="2" style="padding:0 0 20px"><div style="border-top:1px solid #e8e2d4;font-size:1px;line-height:1px">&nbsp;</div></td></tr>
-<tr>
-	<td class="field-label" valign="top">Interesse</td>
-	<td class="field-value" valign="top">%interest%</td>
-</tr>
-<tr><td colspan="2" style="padding:0 0 20px"><div style="border-top:1px solid #e8e2d4;font-size:1px;line-height:1px">&nbsp;</div></td></tr>
-</mj-table>
+<mj-section mj-class="card-row" css-class="card-row">
+	<mj-column width="30%">
+		<mj-text mj-class="field-label-text">Nome</mj-text>
+	</mj-column>
+	<mj-column width="70%">
+		<mj-text mj-class="field-value-text">%name%</mj-text>
+	</mj-column>
+</mj-section>
+<mj-section mj-class="card-row" css-class="card-row">
+	<mj-column>
+		<mj-divider mj-class="field-divider" />
+	</mj-column>
+</mj-section>
 
-<mj-table cellpadding="0" cellspacing="0" width="100%">
-<tr><td class="message-label">Mensagem</td></tr>
-<tr><td class="message-quote">%message%</td></tr>
-</mj-table>
+<mj-section mj-class="card-row" css-class="card-row">
+	<mj-column width="30%">
+		<mj-text mj-class="field-label-text">Email</mj-text>
+	</mj-column>
+	<mj-column width="70%">
+		<mj-text mj-class="field-value-text">%email%</mj-text>
+	</mj-column>
+</mj-section>
+<mj-section mj-class="card-row" css-class="card-row">
+	<mj-column>
+		<mj-divider mj-class="field-divider" />
+	</mj-column>
+</mj-section>
+
+<mj-section mj-class="card-row" css-class="card-row">
+	<mj-column width="30%">
+		<mj-text mj-class="field-label-text">Telefone</mj-text>
+	</mj-column>
+	<mj-column width="70%">
+		<mj-text mj-class="field-value-text">%phone%</mj-text>
+	</mj-column>
+</mj-section>
+<mj-section mj-class="card-row" css-class="card-row">
+	<mj-column>
+		<mj-divider mj-class="field-divider" />
+	</mj-column>
+</mj-section>
+
+<mj-section mj-class="card-row" css-class="card-row">
+	<mj-column width="30%">
+		<mj-text mj-class="field-label-text">Interesse</mj-text>
+	</mj-column>
+	<mj-column width="70%">
+		<mj-text mj-class="field-value-text">%interest%</mj-text>
+	</mj-column>
+</mj-section>
+<mj-section mj-class="card-row" css-class="card-row">
+	<mj-column>
+		<mj-divider mj-class="field-divider" />
+	</mj-column>
+</mj-section>
+
+<mj-section mj-class="card-bottom" css-class="card-bottom">
+	<mj-column>
+		<mj-text mj-class="message-label-text">Mensagem</mj-text>
+		<mj-raw><tr><td class="message-quote">%message%</td></tr></mj-raw>
+	</mj-column>
+</mj-section>
