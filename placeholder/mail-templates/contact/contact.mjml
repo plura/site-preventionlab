@@ -1,7 +1,7 @@
 <mjml>
 <mj-head>
 	<mj-title>Novo Contacto</mj-title>
-	<mj-preview>Novo Contacto — Prevention Lab</mj-preview>
+	<mj-preview>Novo Contacto — {{CLIENT_NAME}}</mj-preview>
 	<mj-include path="../_partials/_head.mjml" />
 </mj-head>
 <mj-body>
@@ -14,11 +14,11 @@
 				<mj-text mj-class="heading" padding="0 0 20px">Novo contacto</mj-text>
 			</mj-column>
 			<mj-column width="30%">
-				<mj-text mj-class="date-text" padding="0 0 20px">%date%</mj-text>
+				<mj-text mj-class="date-text" padding="0 0 20px">%kicker%</mj-text>
 			</mj-column>
 		</mj-section>
 
-		<mj-include path="../_partials/_fields.mjml" />
+		<mj-include path="_partials/_fields.mjml" />
 
 		<mj-include path="../_partials/_footer.mjml" />
 		<mj-include path="../_partials/_credit.mjml" />

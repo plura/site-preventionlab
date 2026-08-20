@@ -37,7 +37,7 @@ const OUT = resolve(ROOT, 'starter/app/templates');
 const TEMPLATES = [
 	{ src: 'contact/contact.mjml', out: 'contact.html' },
 	{ src: 'contact/contact-reply.mjml', out: 'contact-reply.html' },
-	{ src: 'contact/contact-reply.pt.mjml', out: 'contact-reply.pt.html' }, // Tier 2 only
+	// No Tier 2 entry: this site is Portuguese-only. Add one here alongside a second language.
 ];
 
 /**
@@ -59,8 +59,26 @@ async function exists(path) {
  * @returns {Record<string, string>}
  */
 function withDerivedTokens(values) {
-	if (!values.CLIENT_PHONE) return values;
-	return { ...values, CLIENT_PHONE_RAW: values.CLIENT_PHONE.replace(/[^\d+]/g, '') };
+	const out = { ...values };
+
+	if (values.CLIENT_PHONE) {
+		out.CLIENT_PHONE_RAW = values.CLIENT_PHONE.replace(/[^\d+]/g, '');
+		// DIVERGES FROM THE STARTER. Gmail auto-detects phone numbers and email addresses and
+		// re-styles them in its own blue, ignoring the inline anchor colour. A zero-width
+		// non-joiner between the groups breaks that pattern match without changing what the
+		// reader sees or copies. Derived rather than asked for, same reasoning as
+		// CLIENT_PHONE_RAW: one source of truth per value, no second hand-typed copy to drift.
+		out.CLIENT_PHONE_DISPLAY = values.CLIENT_PHONE.split(' ').join('&zwnj; ');
+	}
+
+	if (values.CLIENT_EMAIL) {
+		// Same trick, at the two points Gmail keys off: the @ and the final dot.
+		out.CLIENT_EMAIL_DISPLAY = values.CLIENT_EMAIL
+			.replace('@', '&zwnj;@')
+			.replace(/\.([^.]*)$/, '&zwnj;.$1');
+	}
+
+	return out;
 }
 
 /**
