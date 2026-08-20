@@ -8,4 +8,4 @@
 .claude/
 
 # Form config (SMTP credentials)
-placeholder/app/config.php
+placeholder/starter/app/config.php

@@ -1,6 +1,6 @@
 <mj-section mj-class="header-pad">
 	<mj-column>
-		<mj-image mj-class="logo-image" src="https://preventionlab.pt/assets/images/mail/logo-350x250.png" alt="Prevention Lab" href="https://preventionlab.pt/" />
+		<mj-image mj-class="logo-image" src="https://preventionlab.pt/starter/assets/images/mail/logo-350x250.png" alt="Prevention Lab" href="https://preventionlab.pt/" />
 	</mj-column>
 </mj-section>
 

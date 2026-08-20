@@ -1,5 +1,14 @@
-export function initParticles(canvasId) {
-    const canvas = document.getElementById(canvasId);
+/** The full-bleed canvas this component draws on — also the page's animated backdrop. */
+export const CANVAS_SELECTOR = '#bg-canvas';
+
+/**
+ * Drifting accent-coloured motes rising over the page background. Runs unconditionally once
+ * started; the reveal is handled by fading the canvas, so it's already mid-flight when seen.
+ *
+ * @returns {void}
+ */
+export function initParticles() {
+    const canvas = document.querySelector(CANVAS_SELECTOR);
     const ctx = canvas.getContext('2d');
     let W, H, particles;
 

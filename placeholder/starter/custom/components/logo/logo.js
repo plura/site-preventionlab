@@ -1,3 +1,12 @@
+/** Root of the logo block — the hero the page entrance centres itself on. */
+export const LOGO_SELECTOR = '.pl-logo';
+
+/**
+ * The logo intro: the O rises, the wordmark and tagline resolve around it, then the two
+ * halves of every O displace and the mark takes the accent colour.
+ *
+ * @returns {object} The GSAP timeline, thenable so callers can chain the page reveal onto it.
+ */
 export function initLogo() {
     const { gsap } = window;
     const accent = getComputedStyle(document.documentElement)
