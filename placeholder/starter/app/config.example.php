@@ -16,5 +16,7 @@ return [
 
         'to_email'   => '',                     // where contact notifications go
         'to_name'    => 'Dra. Cristina Ferreira Leite',
+
+        'site_name'  => 'Prevention Lab', // used in email subject lines
     ],
 ];

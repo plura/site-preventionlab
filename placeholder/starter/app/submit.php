@@ -5,17 +5,19 @@ date_default_timezone_set('Europe/Lisbon');
 
 header('Content-Type: application/json; charset=UTF-8');
 
+$strings = require __DIR__ . '/strings.php';
+
 // Only accept POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'Método não permitido.']);
+    echo json_encode(['success' => false, 'message' => $strings['method_not_allowed']]);
     exit;
 }
 
 // Config
 if (!file_exists(__DIR__ . '/config.php')) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Erro de configuração do servidor.']);
+    echo json_encode(['success' => false, 'message' => $strings['config_error']]);
     exit;
 }
 $config = require __DIR__ . '/config.php';
@@ -30,7 +32,8 @@ use PHPMailer\PHPMailer\Exception;
 
 // —— Honeypot ————————————————————————————————————————————————————————————————
 if (!empty($_POST['botcheck'])) {
-    echo json_encode(['success' => true]);
+    // Same response shape as a real success, so nothing signals that the honeypot fired.
+    echo json_encode(['success' => true, 'message' => $strings['sent']]);
     exit;
 }
 
@@ -49,9 +52,13 @@ if (!empty($_POST['labels']) && is_string($_POST['labels'])) {
     }
 }
 
+// 'lang' and 'form_type' are control flags, not content — excluded here so they never leak into
+// the email body as ordinary fields. Both feed into %kicker% instead, see build_kicker() below.
+// 'newsletter' is kept in the list although this project has no mailing list: it costs nothing
+// and means adding one later cannot accidentally mail the checkbox value as a field.
 $data = [];
 foreach ($_POST as $key => $value) {
-    if ($key === 'botcheck' || $key === 'labels' || !is_string($value)) {
+    if ($key === 'botcheck' || $key === 'labels' || $key === 'newsletter' || $key === 'lang' || $key === 'form_type' || !is_string($value)) {
         continue;
     }
     $data[$key] = strip_tags(trim($value));
@@ -60,20 +67,33 @@ foreach ($_POST as $key => $value) {
 // —— Validate ————————————————————————————————————————————————————————————————
 if (empty($data['name']) || empty($data['email'])) {
     http_response_code(422);
-    echo json_encode(['success' => false, 'message' => 'Por favor preencha os campos obrigatórios.']);
+    echo json_encode(['success' => false, 'message' => $strings['required_fields']]);
     exit;
 }
 
 if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
     http_response_code(422);
-    echo json_encode(['success' => false, 'message' => 'Por favor introduza um endereço de email válido.']);
+    echo json_encode(['success' => false, 'message' => $strings['invalid_email']]);
     exit;
 }
 
 $data['email'] = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
 
 // —— Build email body ———————————————————————————————————————————————————————
-function build_body(array $data, ?string $template_path, array $labels = []): string {
+/**
+ * Fills a mail template with the submitted data, falling back to a plain-text list when the
+ * template file is missing.
+ *
+ * @param array       $data          Submitted fields, keyed by input name.
+ * @param string|null $template_path Compiled template under starter/app/templates/, or null for text.
+ * @param array       $labels        Human-readable field names posted by the form, substituted
+ *                                   for %label_<field>%. Falls back to the field's own name.
+ * @param string      $kicker        Pre-built kicker line substituted for %kicker%, e.g.
+ *                                   "Contact form · 06/08/2026 14:32 · PT". Built by
+ *                                   build_kicker() below from whichever parts apply to this send.
+ * @return string
+ */
+function build_body(array $data, ?string $template_path, array $labels = [], string $kicker = ''): string {
     $template = $template_path ? @file_get_contents($template_path) : false;
 
     if ($template === false) {
@@ -87,11 +107,36 @@ function build_body(array $data, ?string $template_path, array $labels = []): st
         return implode("\n", $lines);
     }
 
-    $html = str_replace(['%year%', '%date%'], [date('Y'), date('d/m/Y H:i')], $template);
+    $pairs = [
+        '%year%'   => date('Y'),
+        '%kicker%' => $kicker,
+    ];
+
     foreach ($data as $key => $value) {
-        $html = str_replace('%' . $key . '%', nl2br(htmlspecialchars($value, ENT_QUOTES, 'UTF-8')), $html);
+        // Field labels come from the form that was submitted, not from the template — which is
+        // what makes this handler field-agnostic, and incidentally puts them in the visitor's
+        // language. ucfirst() covers a direct POST that carried no labels at all (bots, curl).
+        $pairs['%label_' . $key . '%'] = htmlspecialchars($labels[$key] ?? ucfirst($key), ENT_QUOTES, 'UTF-8');
+        $pairs['%' . $key . '%']       = nl2br(htmlspecialchars($value, ENT_QUOTES, 'UTF-8'));
     }
-    return $html;
+
+    // strtr(), not str_replace(): it substitutes in a single pass, so a submitted value that
+    // happens to contain a %placeholder% can't be re-substituted by a later replacement.
+    return strtr($template, $pairs);
+}
+
+/**
+ * Joins the kicker's parts (form type, date, language) with a middle dot, dropping any that are
+ * empty. A single implode replaces having each part carry its own conditional leading/trailing
+ * separator — the earlier approach only worked because form type was always first and language
+ * always last; this one has no position-dependent rules to keep in sync if a part is ever added,
+ * removed, or reordered.
+ *
+ * @param string[] $parts
+ * @return string
+ */
+function build_kicker(array $parts): string {
+    return implode(' · ', array_filter($parts, fn(string $part): bool => $part !== ''));
 }
 
 function send_mail(array $cfg, string $to_email, string $to_name, string $subject, string $body, bool $is_html, string $reply_email = '', string $reply_name = ''): bool {
@@ -125,14 +170,28 @@ function send_mail(array $cfg, string $to_email, string $to_name, string $subjec
     }
 }
 
-// —— Notification to clinic ——————————————————————————————————————————————————
+// —— Notification to site owner ————————————————————————————————————————————
+// Shared by both kickers below, so the notification and the reply report the exact same instant
+// rather than two independent date() calls a few milliseconds apart.
+$date = date('d/m/Y H:i');
+
+// Which language version the enquiry came from — the owner's only cue as to which language to
+// reply in. Empty on a single-language site, and build_kicker() drops it rather than leaving an
+// orphaned separator.
+$lang = $strings['_lang'] !== '' ? strtoupper($strings['_lang']) : '';
+
+// A plain hidden field on the contact form (see index.html), not part of the generic per-field
+// loop above — its value is fixed in the OWNER's language, which is why it's only ever passed
+// into the notification's kicker below, never the reply's.
+$form_type = htmlspecialchars(trim((string) ($_POST['form_type'] ?? '')), ENT_QUOTES, 'UTF-8');
+
 $template = __DIR__ . '/templates/contact.html';
 $sent = send_mail(
     $config,
     $config['contact']['to_email'],
     $config['contact']['to_name'],
-    'Prevention Lab — novo contacto do site',
-    build_body($data, $template, $labels),
+    sprintf($strings['subject_notify'], $config['contact']['site_name']),
+    build_body($data, $template, $labels, build_kicker([$form_type, $date, $lang])),
     file_exists($template),
     $data['email'],
     $data['name']
@@ -140,22 +199,26 @@ $sent = send_mail(
 
 if (!$sent) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Erro ao enviar. Por favor tente novamente ou contacte-nos por email.']);
+    echo json_encode(['success' => false, 'message' => $strings['send_error']]);
     exit;
 }
 
 // —— Auto-reply to submitter —————————————————————————————————————————————————
+// Single-language site: one reply template. The starter picks a per-language one here (its
+// Tier 2) — reinstate that block from the starter if a second language is ever added.
 $reply_template = __DIR__ . '/templates/contact-reply.html';
+// No form-type or language part here: form-type is fixed in the owner's language (see above),
+// and language is redundant to the person who just submitted the form in it.
 send_mail(
     $config,
     $data['email'],
     $data['name'],
-    'Prevention Lab — recebemos o seu contacto',
-    build_body($data, $reply_template, $labels),
+    sprintf($strings['subject_reply'], $config['contact']['site_name']),
+    build_body($data, $reply_template, $labels, build_kicker([$date])),
     file_exists($reply_template),
     $config['contact']['to_email'],
     $config['contact']['to_name']
 );
 
 // —— Done ————————————————————————————————————————————————————————————————————
-echo json_encode(['success' => true]);
+echo json_encode(['success' => true, 'message' => $strings['sent']]);
