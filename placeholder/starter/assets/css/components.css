@@ -213,6 +213,19 @@ dialog p {
 }
 
 /* ── Form feedback ── */
+/* Set on the <form> once a submission succeeds, so what disappears is declared here rather than
+   listed in a JS selector — modal.js used to walk .form-group/.btn-submit and set inline
+   display:none, then walk them again on close to unset it. One class, and nothing to restore. */
+.is-sent :is(.form-group, .btn-submit) {
+    display: none;
+}
+
+/* The "(opcional)" marker beside a field label. A span rather than bare text so form.js can
+   strip it before posting the label as the email's field name, without matching on the word. */
+.label-note {
+    color: var(--pl-color-muted);
+}
+
 .form-success {
     font-size: var(--pl-text-sm);
     color: var(--pl-color-dark);
