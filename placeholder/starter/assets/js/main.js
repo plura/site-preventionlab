@@ -1,5 +1,6 @@
 import { initAnimations } from '../../custom/js/animations.js';
 import './modal.js';
+import './newsletter.js'; // remove if this project drops the mailing-list signup
 
 // Bespoke code — see starter/custom/README.md. animations.js moved here from assets/js/:
 // it is this project's GSAP entrance sequence, not anything the starter ships.

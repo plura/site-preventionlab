@@ -228,5 +228,30 @@ send_mail(
     $config['contact']['to_name']
 );
 
+// —— Newsletter opt-in checkbox ——————————————————————————————————————————————
+// Only fires if the contact form's `newsletter` checkbox was ticked. Best-effort: a provider
+// failure here doesn't fail the contact submission, since both emails have already sent by this
+// point. Safe to delete this block (and the checkbox in both pages) if the mailing list goes.
+$subscribed = false;
+
+if (!empty($_POST['newsletter'])) {
+    require_once __DIR__ . '/lib/newsletter.php';
+    $optin = newsletter_subscribe($config, $data['email'], $strings);
+    $subscribed = $optin['success'];
+
+    if (!$subscribed) {
+        error_log('Newsletter opt-in via contact form failed: ' . $optin['message']);
+    }
+}
+
 // —— Done ————————————————————————————————————————————————————————————————————
-echo json_encode(['success' => true, 'message' => $strings['sent']]);
+// One sentence per outcome, assembled from whichever actually happened. The subscription line
+// is only added when the provider confirmed it — that call is best-effort and doesn't fail the
+// submission, so claiming it unconditionally would sometimes be untrue.
+echo json_encode([
+    'success' => true,
+    'message' => implode(' ', array_filter([
+        $strings['sent'],
+        $subscribed ? $strings['sent_subscribed'] : '',
+    ])),
+]);

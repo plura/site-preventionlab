@@ -46,9 +46,19 @@ project does *differently* is below.
   English at the root, so check which direction its examples mean:
   `$BASE` in `strings.php` is Portuguese and `$OVERRIDES['en']` is the delta,
   and the second reply template is `contact-reply.en.mjml`.
-- **No mailing list and no dark/light mode.** Both are starter features
-  deliberately not brought in. `submit.php` has no newsletter block; the CSS is
-  a single palette. Reinstating either means copying the marked blocks back.
+- **No dark/light mode.** A starter feature deliberately not brought in — the CSS
+  is a single palette. Reinstating it means copying the marked blocks back.
+- **The mailing list has no credentials yet.** Both entry points are built (the
+  standalone signup and the contact-form opt-in) and the provider is Brevo, but
+  `newsletter.api_key`/`list_id` are empty pending the account. So
+  `npm run check:config` **fails on those two fields by design** — the guard
+  doing its job, not an oversight — and the signup answers 500 until they are
+  filled in. Do not ship the signup to a client as working before then.
+- **Adding a page section means editing `custom/js/animations.js`, not just the
+  markup.** Its `layoutEls` list is hidden while the logo holds the stage and
+  cascaded in afterwards; anything left out of it stays visible from first paint
+  *and* skews the centred-position measurement the FLIP depends on. `.newsletter`
+  is in the list and has its own timeline step.
 - **CSS tokens are `--pl-*`, not `--site-*`.** The naming predates the starter's.
   A `base.css` change from the starter never applies verbatim here.
 

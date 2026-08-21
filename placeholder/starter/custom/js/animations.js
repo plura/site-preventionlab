@@ -19,7 +19,12 @@ export function initAnimations({ hero, intro, backdrop, onReveal = () => {} }) {
     // index.html) rather than its own text node — animating it directly would gate the
     // visibility of everything nested inside via CSS opacity compounding, collapsing the
     // stagger. .legal (holding what .footer used to contain) takes its place in the sequence.
-    const layoutEls = ['#divider', '.contact', '.cta-wrap', '.socials', '.legal'];
+    //
+    // Anything added to the page that shouldn't be on screen while the hero holds the stage has
+    // to be listed here too. An element left out stays visible from the first paint AND takes up
+    // space, which throws off the centred-position measurement the FLIP below depends on — so
+    // adding a section is two edits, this list and a timeline step, never markup alone.
+    const layoutEls = ['#divider', '.newsletter', '.contact', '.cta-wrap', '.socials', '.legal'];
 
     if (backdrop) gsap.set(backdrop, { opacity: 0 });
 
@@ -50,7 +55,8 @@ export function initAnimations({ hero, intro, backdrop, onReveal = () => {} }) {
         if (backdrop) tl.to(backdrop, { opacity: 1, duration: 1.5, ease: 'sine.out' }, 0);
         tl.to(hero,        { y: 0, duration: 1.2, ease: 'sine.inOut' }, 0);
         tl.to('#divider',  { width: 80, duration: 1.0, ease: 'sine.inOut' }, '-=0.4');
-        tl.fromTo('.contact', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.8, ease: 'sine.out' }, '-=0.3');
+        tl.to('.newsletter', { opacity: 1, duration: 0.7, ease: 'sine.out' }, '-=0.3');
+        tl.fromTo('.contact', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.8, ease: 'sine.out' }, '-=0.2');
         tl.to('.cta-wrap', { opacity: 1, duration: 0.7, ease: 'sine.out' }, '-=0.2');
         tl.to('.socials',  { opacity: 1, duration: 0.7, ease: 'sine.out' }, '-=0.2');
         tl.to('.legal',    { opacity: 1, duration: 0.7, ease: 'sine.out' }, '-=0.2');

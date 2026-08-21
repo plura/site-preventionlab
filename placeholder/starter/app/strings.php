@@ -22,9 +22,23 @@ $BASE = [
     'invalid_email'      => 'Por favor introduza um endereço de email válido.',
     'send_error'         => 'Erro ao enviar. Por favor tente novamente ou contacte-nos por email.',
     'sent'               => 'Mensagem enviada. Entraremos em contacto em breve.',
+    // Appended to 'sent' when the contact form's opt-in was ticked and the subscribe succeeded.
+    // A separate sentence rather than a second full message, so the wording above exists once.
+    // The email is the subject of the sentence, not the reader — which is what keeps it neutral.
+    'sent_subscribed'    => 'O seu email também foi adicionado à lista.',
 
     // %s is contact.site_name from config.php. Visitor-facing - the auto-reply's subject.
     'subject_reply' => '%s — recebemos o seu contacto',
+
+    // Mailing list.
+    'newsletter_not_configured' => 'A subscrição não está configurada corretamente.',
+    // Deliberately says nothing about confirming by email: Brevo does NOT double opt-in on its
+    // own — that takes a DOI template configured in the account, not a flag on the request (see
+    // lib/newsletter/brevo.php). Add "Verifique o seu email para confirmar." only once the
+    // account actually sends one; promising a confirmation that never arrives is worse.
+    'subscribe_confirm'         => 'Subscrição efetuada com sucesso.',
+    'already_subscribed'        => 'Este email já consta da lista.',
+    'generic_error'             => 'Ocorreu um erro. Por favor tente novamente mais tarde.',
 ];
 
 
@@ -38,8 +52,16 @@ $OVERRIDES = [
         'invalid_email'      => 'Please enter a valid email address.',
         'send_error'         => 'Could not send your message. Please try again, or get in touch by email.',
         'sent'               => 'Message sent. You will hear back shortly.',
+        'sent_subscribed'    => 'You have also been added to the mailing list.',
 
         'subject_reply' => '%s — message received',
+
+        // Mailing list. See the note on subscribe_confirm in $BASE — this one drops the
+        // confirmation instruction for the same reason.
+        'newsletter_not_configured' => 'Subscriptions are not configured correctly.',
+        'subscribe_confirm'         => 'Thanks for subscribing.',
+        'already_subscribed'        => 'This email is already subscribed.',
+        'generic_error'             => 'Something went wrong. Please try again later.',
     ],
 ];
 

@@ -212,6 +212,95 @@ dialog p {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23111111' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
+
+/* OPTIONAL: newsletter opt-in checkbox inside the contact form — remove alongside the
+   <label class="form-check"> in both pages if this project drops the mailing list. */
+/* A sibling of .form-group, not a child: .form-group styles its label as a block caption and
+   its input as a full-width underlined field, both wrong for a checkbox beside its text. It
+   carries the same margin so the rows still line up, and .is-sent lists it explicitly. */
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: var(--pl-space-xs);
+    font-size: var(--pl-text-sm);
+    color: var(--pl-color-muted);
+    cursor: pointer;
+    margin-bottom: 1.1rem;
+}
+
+.form-check input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: var(--pl-color-accent);
+    cursor: pointer;
+}
+
+/* Smaller once there's a pointer rather than a thumb — 16px reads heavy beside the label at
+   desktop sizes, but is the smaller of the two on a touch screen. */
+@media (min-width: 480px) {
+    .form-check input[type="checkbox"] { width: 14px; height: 14px; }
+}
+
+/* OPTIONAL: standalone mailing-list signup — remove alongside the .newsletter block in both
+   pages, starter/assets/js/newsletter.js, and '.newsletter' in custom/js/animations.js. */
+.newsletter {
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+}
+
+.newsletter__kicker {
+    font-size: var(--pl-text-xs);
+    letter-spacing: var(--pl-tracking-lg);
+    text-transform: uppercase;
+    color: var(--pl-color-muted);
+    margin-bottom: var(--pl-space-sm);
+}
+
+.newsletter__row {
+    display: flex;
+    align-items: stretch;
+    gap: var(--pl-space-sm);
+    border-bottom: 1px solid var(--pl-color-border);
+    transition: border-color var(--pl-transition);
+}
+
+.newsletter__row:focus-within { border-color: var(--pl-color-accent); }
+
+.newsletter__row input {
+    flex: 1;
+    min-width: 0;
+    padding: .5rem 0;
+    border: none;
+    background: transparent;
+    font-family: var(--pl-font-sans);
+    font-size: var(--pl-text-base);
+    color: var(--pl-color-fg);
+    outline: none;
+}
+
+.newsletter__row input::placeholder { color: var(--pl-color-muted); }
+
+.newsletter__submit {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    color: var(--pl-color-fg);
+    cursor: pointer;
+    padding: 0 .25rem;
+    transition: color var(--pl-transition), transform var(--pl-transition-fast);
+}
+
+.newsletter__submit:hover { color: var(--pl-color-accent); transform: translateX(2px); }
+
+/* .form-success defaults to the modal's colours — override for the page's own, since this
+   section sits directly on the page canvas rather than inside the dialog. */
+.newsletter .form-success { color: var(--pl-color-fg); padding: 0; }
+
+.newsletter .form-error { margin: .5rem 0 0; }
+
 /* ── Page controls ──
    Fixed top-right rail. Holds the language switch; the starter also puts a theme toggle here,
    which this project has no use for while it is single-theme. The rail and the shared circle
@@ -263,7 +352,8 @@ dialog p {
 /* Set on the <form> once a submission succeeds, so what disappears is declared here rather than
    listed in a JS selector — modal.js used to walk .form-group/.btn-submit and set inline
    display:none, then walk them again on close to unset it. One class, and nothing to restore. */
-.is-sent :is(.form-group, .btn-submit) {
+.is-sent :is(.form-group, .form-check, .btn-submit),
+.is-sent .newsletter__row {
     display: none;
 }
 
