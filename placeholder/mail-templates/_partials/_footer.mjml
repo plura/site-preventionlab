@@ -1,0 +1,17 @@
+<mj-section mj-class="footer-pad" css-class="footer-pad">
+	<mj-column mj-class="footer-column">
+		<mj-text mj-class="footer-name" padding="0 0 20px">{{CLIENT_NAME}}</mj-text>
+		<mj-text mj-class="footer-text" padding="0 0 20px">
+			<a href="mailto:{{CLIENT_EMAIL}}" class="footer-link">{{CLIENT_EMAIL_DISPLAY}}</a><br />
+			<a href="tel:{{CLIENT_PHONE_RAW}}" class="footer-link">{{CLIENT_PHONE_DISPLAY}}</a><br />
+			<a href="{{CLIENT_MAP_URL}}" class="footer-link">{{CLIENT_ADDRESS}}</a>
+		</mj-text>
+		<mj-text mj-class="footer-text" padding="0">
+			<a href="{{CLIENT_INSTAGRAM}}" class="footer-link">Instagram</a>
+			&nbsp;&middot;&nbsp;
+			<a href="{{CLIENT_FACEBOOK}}" class="footer-link">Facebook</a>
+			&nbsp;&middot;&nbsp;
+			<a href="{{CLIENT_LINKEDIN}}" class="footer-link">LinkedIn</a>
+		</mj-text>
+	</mj-column>
+</mj-section>

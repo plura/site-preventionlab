@@ -1,85 +1,78 @@
 # Prevention Lab — Site
 
-Corporate website for **Prevention Lab**, a preventive medicine clinic focused on stress, sleep, and longevity. Porto.
+Corporate website for **Prevention Lab**, a preventive medicine clinic focused on
+stress, sleep, and longevity. Porto. Copy is PT-PT throughout.
 
-> Structural parity with [site-placeholder-starter](https://github.com/plura/site-placeholder-starter)
-> as of `248ab80` (2026-07-21), plus the `starter/` + `starter/custom/` folder split adopted
-> 2026-08-21. Not a fork — this project independently converged with the starter's conventions,
-> and is in fact one of the two sources it was extracted from. The starter's newer mailing-list,
-> multi-language and dark/light-mode features were deliberately not brought in here.
->
-> `starter/app/` and `starter/assets/` are the folders to diff against the starter when an
-> update lands; `starter/custom/` never came from it. See `placeholder/starter/custom/README.md`.
+## Placeholder
 
-## Structure
+`placeholder/` is a customized [site-placeholder-starter](https://github.com/plura/site-placeholder-starter),
+brought to parity with commit [`ba6d506`](https://github.com/plura/site-placeholder-starter/tree/ba6d506)
+in 2026-08. It mirrors the starter's structure 1:1 — the starter's repo root is
+our `placeholder/`.
 
-```
-/
-├── mail-templates/                     # MJML source for transactional emails (not deployed)
-│   ├── _partials/
-│   │   ├── _head.mjml                  # Shared mj-attributes, mj-style, mj-class definitions
-│   │   ├── _header.mjml                # Logo + accent divider
-│   │   ├── _fields.mjml                # Form-data table (shared by contact + contact-reply)
-│   │   ├── _footer.mjml                # Contact info + social links
-│   │   └── _credit.mjml                # Copyright / Plura credit line
-│   └── contact/
-│       ├── contact.mjml                # Notification email (to the clinic)
-│       └── contact-reply.mjml          # Auto-reply email (to the submitter)
-├── placeholder/                        # Coming-soon landing page (this folder is the webroot)
-│   ├── index.html
-│   └── starter/                        # Everything the starter owns, plus the custom slot
-│       ├── app/                        # Server-side form processing (not public)
-│       │   ├── submit.php              # Form handler — agnostic to fields, sends email + auto-reply
-│       │   ├── config.example.php      # SMTP config template — copy to config.php and fill in
-│       │   ├── config.php              # SMTP credentials (gitignored, create on server)
-│       │   ├── lib/phpmailer/          # PHPMailer core files
-│       │   └── templates/
-│       │       ├── contact.html        # Compiled from mail-templates/contact/contact.mjml
-│       │       ├── contact-reply.html  # Compiled from mail-templates/contact/contact-reply.mjml
-│       │       └── .htaccess           # Deny direct access to templates/
-│       ├── assets/
-│       │   ├── css/
-│       │   │   ├── base.css            # Reset, CSS vars (--pl-*), html/body
-│       │   │   ├── layout.css          # Page structure, divider
-│       │   │   └── components.css      # UI components (buttons, modal, form, socials…)
-│       │   ├── icons/                  # SVG brand icons (social)
-│       │   │   ├── facebook.svg
-│       │   │   ├── instagram.svg
-│       │   │   └── linkedin.svg
-│       │   ├── images/
-│       │   │   ├── og.png              # Open Graph image
-│       │   │   └── mail/
-│       │   │       └── logo-350x250.png # Logo used in email header (must be public — fetched by email clients)
-│       │   └── js/
-│       │       ├── main.js             # Entry point — wires the starter modules to the custom components
-│       │       ├── animations.js       # Generic entrance orchestrator (FLIP + layout cascade), hero-agnostic
-│       │       └── modal.js            # Native <dialog> modal + focus trap
-│       └── custom/                     # Bespoke code with no starter equivalent — see its README
-│           └── components/
-│               ├── logo/               # logo.css (layout + --pl-logo-* vars), logo.js (GSAP intro)
-│               └── particles/          # particles.css (#bg-canvas), particles.js (canvas backdrop)
-└── .vscode/
-    ├── sftp.json                       # SFTP credentials (gitignored)
-    ├── sftp.json.example               # Template — copy and fill in credentials
-    └── settings.json                   # mjml.allowIncludes / mjml.includePath for live preview
-```
+**Not a fork.** This project independently converged with the starter's
+conventions and is one of the two sources it was extracted from, so "parity"
+here means the shapes agree, not that files were copied down wholesale.
 
-## SFTP Setup
+**How any of it works — setup, the mail-template build, MJML gotchas — is
+[documented in the starter](https://github.com/plura/site-placeholder-starter/tree/ba6d506#readme),
+not repeated here.** Links are pinned to the ported commit. Only what this
+project does *differently* is below.
 
-Copy `.vscode/sftp.json.example` to `.vscode/sftp.json` and fill in your host credentials. The `sftp.json` file is gitignored.
+### Divergences
 
-## Form Setup
+- **The email design is this project's own** — a light frame around a white card
+  with a lime accent rule, a CTA button and a quoted-message block. The starter's
+  card-plus-dark-band design is not used, so `BRAND_DARK*` and `BRAND_RADIUS*`
+  don't exist here and two extra colours do (`BRAND_RULE`, `BRAND_CREDIT`). Only
+  the *build* is shared: **never diff the `.mjml` against the starter's**, only
+  the pipeline around them. See `mail-templates/_tokens.json`.
+- **`tools/build-mail.mjs` derives two extra tokens** — `CLIENT_EMAIL_DISPLAY`
+  and `CLIENT_PHONE_DISPLAY`, which insert zero-width non-joiners so Gmail stops
+  auto-detecting the address and phone number and recolouring them over the
+  inline anchor styles. This is an edit to a starter-owned file, so it needs
+  merging by hand on the next port — and is worth upstreaming.
+- **`mail-templates/tokens.json` is committed**, not gitignored as the starter
+  does it. The starter withholds it because it's a reusable template that
+  shouldn't carry client data — moot inside the project's own repo.
+- **"Obrigada" in the auto-reply is deliberate.** It agrees with the speaker,
+  Dra. Cristina Ferreira Leite, not the reader, so the starter's Portuguese
+  gender-neutrality rule doesn't apply. Don't "fix" it.
+- **`starter/custom/`** — `js/animations.js` (the GSAP entrance sequence) and
+  `components/logo/` + `components/particles/`. This project's own code; never
+  diff it against the starter.
+- **Single language, no mailing list, no dark/light mode.** All three are
+  starter features deliberately not brought in. `strings.php` has no
+  `$OVERRIDES`, `submit.php` has no newsletter block and no per-language reply
+  template, and `build-mail.mjs` has no Tier 2 entry. Reinstating any of them
+  means copying the marked blocks back from the starter.
+- **CSS tokens are `--pl-*`, not `--site-*`.** The naming predates the starter's.
+  A `base.css` change from the starter never applies verbatim here.
 
-Copy `placeholder/starter/app/config.example.php` to `placeholder/starter/app/config.php` on the server and fill in SMTP credentials. The `config.php` file is gitignored and must be created manually on the server.
+### Day-to-day
 
-## Email Templates
+All run from `placeholder/`:
 
-Source lives in `mail-templates/` (MJML), compiled to `placeholder/starter/app/templates/*.html` for `submit.php` to load. Rebuild after editing:
+- `npm run build:mail` — after any `mail-templates/` edit. Output goes straight
+  to `starter/app/templates/`, which is what PHP reads; there is no `dist/` and
+  no copy step.
+- `npm run check:config` — after adding or removing a feature in the markup.
+- `npm run check:pages` — inert while there's one language.
 
-```
-npx mjml mail-templates/contact/contact.mjml -o placeholder/starter/app/templates/contact.html --config.allowIncludes true --config.includePath . --config.minify true
-npx mjml mail-templates/contact/contact-reply.mjml -o placeholder/starter/app/templates/contact-reply.html --config.allowIncludes true --config.includePath . --config.minify true
-```
+Uncommitted local files, both gitignored: `.vscode/sftp.json` (from
+`.vscode/sftp.json.example`) and `placeholder/starter/app/config.php` (from
+`config.example.php` — SMTP and the contact addresses).
+
+## Deployment
+
+The starter's standard — [see it there](https://github.com/plura/site-placeholder-starter/blob/ba6d506/docs/deploying.md),
+values are in [`.cpanel.yml`](.cpanel.yml). Merging to `main` deploys. SFTP stays configured
+for the one thing a git deploy can never carry: `placeholder/starter/app/config.php`.
+
+**The live site is behind the repo, and by two structural steps** — preventionlab.pt still
+serves the pre-`starter/` flat layout. So the first deploy after this is a restructure: it needs
+`config.php` moved to `starter/app/` on the server *first*, and leaves the old `assets/` and
+`app/` directories live afterwards, since `cp -R` cannot delete. Both are manual, once.
 
 ## Contact
 

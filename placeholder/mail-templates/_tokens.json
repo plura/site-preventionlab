@@ -1,0 +1,64 @@
+{
+	"_note": "Build-time tokens for THIS project. Replaced before the MJML compile by tools/build-mail.mjs. Runtime %field% placeholders are NOT listed here and must never be replaced - submit.php fills those on every send. Adapted from the starter's _tokens.json; the differences are recorded under _diverges_from_starter below.",
+
+	"_diverges_from_starter": {
+		"design": "This project's email is not the starter's card+dark-band design. It is a light frame around a white card with a lime accent rule, a CTA button and a quoted-message block, none of which the starter has. Only the BUILD is shared, not the layout - so do not diff the .mjml against the starter's, only the pipeline around them.",
+		"no_dark_band": "BRAND_DARK / BRAND_DARK_MUTED / BRAND_DARK_RULE / BRAND_RADIUS / BRAND_RADIUS_INNER do not exist here. There is no dark footer band and no rounded card.",
+		"extra_colours": "BRAND_RULE (footer column top border) and BRAND_CREDIT (the credit line and its link) have no starter equivalent.",
+		"display_variants": "CLIENT_EMAIL_DISPLAY and CLIENT_PHONE_DISPLAY are derived in tools/build-mail.mjs, not listed here - see CLIENT_EMAIL below."
+	},
+
+	"_runtime_placeholders": [
+		"%name%",
+		"%email%",
+		"%phone%",
+		"%interest%",
+		"%message%",
+		"%label_name%",
+		"%label_email%",
+		"%label_phone%",
+		"%label_interest%",
+		"%label_message%",
+		"%kicker%",
+		"%year%"
+	],
+
+	"_kicker_note": "%kicker% replaced the older bare %date%. submit.php's build_kicker() joins the form-type field, the date and the language code with a middle dot, dropping whichever do not apply. It renders in the date-text slot at the top right of the notification; the reply gets the date alone.",
+
+	"client": {
+		"CLIENT_NAME": { "required": true, "used_in": ["_header.mjml", "_footer.mjml", "_credit.mjml"] },
+		"CLIENT_URL": { "required": true, "used_in": ["_header.mjml", "contact-reply.mjml"], "note": "Site root. Also the CTA button's destination in the reply." },
+		"CLIENT_LOGO_URL": {
+			"required": true,
+			"used_in": ["_header.mjml"],
+			"note": "Unlike the starter, this project ships a real logo image rather than a text wordmark. Must be publicly reachable - it lives under starter/assets/images/mail/, never under starter/app/templates/, which is .htaccess-locked and unreachable by mail clients."
+		},
+		"CLIENT_EMAIL": {
+			"required": true,
+			"used_in": ["_footer.mjml"],
+			"note": "The href uses this value; the visible text uses CLIENT_EMAIL_DISPLAY, derived from it in build-mail.mjs by inserting zero-width non-joiners at the @ and the final dot. That stops Gmail auto-detecting the address and recolouring it, which it does regardless of inline anchor styles. Do not hand-write the display form."
+		},
+		"CLIENT_PHONE": {
+			"required": true,
+			"used_in": ["_footer.mjml", "contact-reply.mjml"],
+			"note": "Display form, with spaces. CLIENT_PHONE_RAW (tel: href) and CLIENT_PHONE_DISPLAY (zero-width non-joiners between groups, same Gmail reason as the email) are both derived from it. Do not ask for the same number twice."
+		},
+		"CLIENT_ADDRESS": { "required": false, "used_in": ["_footer.mjml"] },
+		"CLIENT_MAP_URL": { "required": false, "used_in": ["_footer.mjml"], "note": "Unwrap the address to plain text rather than leaving a link to nowhere if this is absent." },
+		"CLIENT_INSTAGRAM": { "required": false, "used_in": ["_footer.mjml"], "note": "Delete the whole <a> and its separator if the client has no account - an empty href is worse than no link." },
+		"CLIENT_FACEBOOK": { "required": false, "used_in": ["_footer.mjml"] },
+		"CLIENT_LINKEDIN": { "required": false, "used_in": ["_footer.mjml"] }
+	},
+
+	"brand": {
+		"BRAND_FONT": { "note": "Email-safe stacks only. No web fonts - most clients strip external font loading." },
+		"BRAND_FONT_HEADING": { "note": "Headings only. Georgia here, against the sans body." },
+		"BRAND_ACCENT": { "note": "The lime rule under the logo, the message-quote's left border, and the urgent link's underline. Small elements only - it is far too bright to carry text." },
+		"BRAND_INK": { "note": "Body copy, headings, the CTA button's fill." },
+		"BRAND_MUTED": { "note": "Field labels, the kicker date, footer copy." },
+		"BRAND_SURFACE": { "note": "The white card." },
+		"BRAND_FRAME": { "note": "The warm ground the card sits on. Also the field-divider hairline and the message-quote fill, which is why there is no separate BRAND_TINT." },
+		"BRAND_RULE": { "note": "The footer column's top border. No starter equivalent." },
+		"BRAND_CREDIT": { "note": "The credit line and its link - deliberately lighter than BRAND_MUTED, so the Plura credit sits below the client's own footer in the hierarchy. No starter equivalent." }
+	}
+}
