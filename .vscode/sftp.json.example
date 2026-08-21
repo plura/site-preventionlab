@@ -15,12 +15,12 @@
             "delete": true
         },
         "ignore": [
-            "*.code-workspace",
             ".gitkeep",
             ".git",
             ".gitignore",
             ".claude",
             ".vscode",
+            "*.code-workspace",
             "config.example.php",
             "mail-templates",
             "tools",
