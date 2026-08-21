@@ -1,14 +1,27 @@
 <!DOCTYPE html>
+<!--
+    The English version of index.html.
+
+    A full copy of the root page, not a template — static HTML has no include mechanism, so
+    the <head> is duplicated wholesale. ANY structural change to index.html (favicons, meta,
+    JSON-LD, form fields) has to be mirrored here or the two drift; `npm run check:pages`
+    compares them. Only the copy, the paths and the language metadata are meant to differ.
+
+    Paths are one level deeper — hence ../starter/assets, ../site.webmanifest and
+    data-app-base="../starter/app/".
+
+    Portuguese is this site's default and lives at the root; this is the translation.
+-->
 <!-- data-app-base: where the PHP endpoints sit relative to THIS page. Read by form.js, which
      is shared by every language version and so cannot hardcode a depth. -->
-<html lang="pt" data-app-base="starter/app/">
+<html lang="en" data-app-base="../starter/app/">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prevention Lab | Medicina Preventiva, Porto</title>
-    <meta name="description" content="Prevention Lab — Medicina preventiva, gestão de stress, qualidade do sono e longevidade, no Porto. Dra. Cristina Ferreira Leite.">
+    <title>Prevention Lab | Preventive Medicine, Porto</title>
+    <meta name="description" content="Prevention Lab — Preventive medicine, stress management, sleep quality and longevity, in Porto. Dr. Cristina Ferreira Leite.">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://preventionlab.pt/">
+    <link rel="canonical" href="https://preventionlab.pt/en/">
 
     <!-- Language alternates. Every version must list every version including itself — a
          one-sided pairing is ignored outright — and x-default names the version served to
@@ -18,38 +31,38 @@
     <link rel="alternate" hreflang="x-default" href="https://preventionlab.pt/">
 
     <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="96x96" href="starter/assets/favicons/favicon-96x96.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="starter/assets/favicons/apple-touch-icon.png">
-    <link rel="manifest" href="site.webmanifest">
+    <link rel="icon" type="image/png" sizes="96x96" href="../starter/assets/favicons/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../starter/assets/favicons/apple-touch-icon.png">
+    <link rel="manifest" href="../site.webmanifest">
     <meta name="theme-color" content="#252920">
 
     <!-- Open Graph -->
     <meta property="og:type"        content="website">
-    <meta property="og:url"         content="https://preventionlab.pt/">
+    <meta property="og:url"         content="https://preventionlab.pt/en/">
     <meta property="og:site_name"   content="Prevention Lab">
-    <meta property="og:title"       content="Prevention Lab | Medicina Preventiva, Porto">
-    <meta property="og:description" content="Medicina preventiva, gestão de stress, qualidade do sono e longevidade, no Porto. Dra. Cristina Ferreira Leite.">
-    <meta property="og:locale"      content="pt_PT">
+    <meta property="og:title"       content="Prevention Lab | Preventive Medicine, Porto">
+    <meta property="og:description" content="Preventive medicine, stress management, sleep quality and longevity, in Porto. Dr. Cristina Ferreira Leite.">
+    <meta property="og:locale"      content="en_GB">
     <meta property="og:image"       content="https://preventionlab.pt/starter/assets/images/og.png">
     <meta property="og:image:width"  content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt"    content="Prevention Lab — Medicina Preventiva, Porto">
+    <meta property="og:image:alt"    content="Prevention Lab — Preventive Medicine, Porto">
 
     <!-- Twitter / X -->
     <meta name="twitter:card"        content="summary_large_image">
-    <meta name="twitter:title"       content="Prevention Lab | Medicina Preventiva, Porto">
-    <meta name="twitter:description" content="Medicina preventiva, gestão de stress, qualidade do sono e longevidade, no Porto. Dra. Cristina Ferreira Leite.">
+    <meta name="twitter:title"       content="Prevention Lab | Preventive Medicine, Porto">
+    <meta name="twitter:description" content="Preventive medicine, stress management, sleep quality and longevity, in Porto. Dr. Cristina Ferreira Leite.">
     <meta name="twitter:image"       content="https://preventionlab.pt/starter/assets/images/og.png">
-    <meta name="twitter:image:alt"   content="Prevention Lab — Medicina Preventiva, Porto">
+    <meta name="twitter:image:alt"   content="Prevention Lab — Preventive Medicine, Porto">
 
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "MedicalBusiness",
         "name": "Prevention Lab",
-        "url": "https://preventionlab.pt/",
+        "url": "https://preventionlab.pt/en/",
         "image": "https://preventionlab.pt/starter/assets/images/og.png",
-        "description": "Clínica de medicina preventiva no Porto, especializada em gestão de stress, qualidade do sono, longevidade e programas de bem-estar corporativo.",
+        "description": "Preventive medicine clinic in Porto, specialising in stress management, sleep quality, longevity and corporate wellbeing programmes.",
         "telephone": "+351912198818",
         "email": "info@preventionlab.pt",
         "address": {
@@ -62,7 +75,7 @@
         "employee": {
             "@type": "Person",
             "name": "Cristina Ferreira Leite",
-            "jobTitle": "Médica"
+            "jobTitle": "Physician"
         },
         "sameAs": [
             "https://www.instagram.com/dracristinaleite_prevlab/",
@@ -72,11 +85,11 @@
     }
     </script>
 
-    <link rel="stylesheet" href="starter/assets/css/base.css">
-    <link rel="stylesheet" href="starter/assets/css/layout.css">
-    <link rel="stylesheet" href="starter/assets/css/components.css">
-    <link rel="stylesheet" href="starter/custom/components/particles/particles.css">
-    <link rel="stylesheet" href="starter/custom/components/logo/logo.css">
+    <link rel="stylesheet" href="../starter/assets/css/base.css">
+    <link rel="stylesheet" href="../starter/assets/css/layout.css">
+    <link rel="stylesheet" href="../starter/assets/css/components.css">
+    <link rel="stylesheet" href="../starter/custom/components/particles/particles.css">
+    <link rel="stylesheet" href="../starter/custom/components/logo/logo.css">
 </head>
 <body>
 
@@ -85,13 +98,13 @@
 <!-- Fixed top-right rail. A real link rather than a JS button, so crawlers follow it;
      labelled with the language you get by clicking, not the one you are on. -->
 <div class="page-controls">
-    <a class="page-control lang-switch" href="en/" hreflang="en" lang="en" aria-label="View in English">EN</a>
+    <a class="page-control lang-switch" href="../" hreflang="pt" lang="pt" aria-label="Ver em português">PT</a>
 </div>
 
 <div class="page">
 
-    <h1 class="sr-only">Prevention Lab — Medicina Preventiva, Gestão de Stress, Sono e Longevidade no Porto</h1>
-    <p class="sr-only">A Prevention Lab é uma clínica de medicina preventiva no Porto, liderada pela Dra. Cristina Ferreira Leite, especializada em gestão de stress, qualidade do sono, longevidade e programas de bem-estar corporativo.</p>
+    <h1 class="sr-only">Prevention Lab — Preventive Medicine, Stress Management, Sleep and Longevity in Porto</h1>
+    <p class="sr-only">Prevention Lab is a preventive medicine clinic in Porto, led by Dr. Cristina Ferreira Leite, specialising in stress management, sleep quality, longevity and corporate wellbeing programmes.</p>
 
     <div class="pl-logo">
         <div class="pl-logo__mark" aria-hidden="true">
@@ -120,23 +133,23 @@
         </div>
 
         <div class="cta-wrap">
-            <button class="btn-cta" id="open-modal">Saber Mais</button>
+            <button class="btn-cta" id="open-modal">Learn More</button>
         </div>
 
         <div class="socials">
             <a href="https://www.instagram.com/dracristinaleite_prevlab/" target="_blank" rel="noopener" aria-label="Instagram">
-                <span class="social-icon" style="mask-image: url('starter/assets/icons/instagram.svg')"></span>
+                <span class="social-icon" style="mask-image: url('../starter/assets/icons/instagram.svg')"></span>
             </a>
             <a href="https://www.facebook.com/Prevention.Lab.Porto/" target="_blank" rel="noopener" aria-label="Facebook">
-                <span class="social-icon" style="mask-image: url('starter/assets/icons/facebook.svg')"></span>
+                <span class="social-icon" style="mask-image: url('../starter/assets/icons/facebook.svg')"></span>
             </a>
             <a href="https://www.linkedin.com/company/prevention-lab-porto/" target="_blank" rel="noopener" aria-label="LinkedIn">
-                <span class="social-icon" style="mask-image: url('starter/assets/icons/linkedin.svg')"></span>
+                <span class="social-icon" style="mask-image: url('../starter/assets/icons/linkedin.svg')"></span>
             </a>
         </div>
 
         <div class="legal">
-            <p>&copy; 2026 Prevention Lab. Todos os direitos reservados.</p>
+            <p>&copy; 2026 Prevention Lab. All rights reserved.</p>
             <p class="footer-credit">Powered by <a href="https://plura.pt" target="_blank" rel="noopener">Plura</a></p>
         </div>
     </footer>
@@ -146,48 +159,48 @@
 <!-- Modal -->
 <dialog id="contact-dialog" aria-labelledby="modal-title">
     <div class="dialog__inner">
-        <button class="modal-close" id="close-modal" aria-label="Fechar">
+        <button class="modal-close" id="close-modal" aria-label="Close">
             <i data-lucide="x" width="20" height="20"></i>
         </button>
-        <h2 id="modal-title">Fique a par</h2>
-        <p>Deixe os seus dados e entraremos em contacto assim que estivermos disponíveis.</p>
+        <h2 id="modal-title">Stay in the loop</h2>
+        <p>Leave your details and we will be in touch as soon as we are available.</p>
         <form id="contact-form" novalidate
-              data-network-error="Erro ao enviar. Tente novamente ou contacte-nos por email.">
+              data-network-error="Could not send. Please try again, or get in touch by email.">
             <div class="form-group">
-                <label for="name">Nome</label>
-                <input type="text" id="name" name="name" placeholder="O seu nome" required>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="o.seu@email.com" required>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required>
             </div>
             <div class="form-group">
-                <label for="phone">Telefone <span class="label-note">(opcional)</span></label>
+                <label for="phone">Phone <span class="label-note">(optional)</span></label>
                 <input type="tel" id="phone" name="phone" placeholder="+351 900 000 000">
             </div>
             <div class="form-group">
-                <label for="interest">Interesse</label>
+                <label for="interest">Interest</label>
                 <select id="interest" name="interest">
-                    <option value="">Selecione uma área...</option>
-                    <option value="stress">Gestão de Stress</option>
-                    <option value="sleep">Qualidade do Sono</option>
-                    <option value="longevity">Longevidade</option>
-                    <option value="corporate">Programa Corporativo</option>
-                    <option value="other">Outro</option>
+                    <option value="">Select an area...</option>
+                    <option value="stress">Stress Management</option>
+                    <option value="sleep">Sleep Quality</option>
+                    <option value="longevity">Longevity</option>
+                    <option value="corporate">Corporate Programme</option>
+                    <option value="other">Other</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="message">Mensagem <span class="label-note">(opcional)</span></label>
-                <textarea id="message" name="message" placeholder="Em que podemos ajudar?"></textarea>
+                <label for="message">Message <span class="label-note">(optional)</span></label>
+                <textarea id="message" name="message" placeholder="How can we help?"></textarea>
             </div>
             <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-            <button type="submit" class="btn-submit">Enviar</button>
+            <button type="submit" class="btn-submit">Send</button>
         </form>
     </div>
 </dialog>
 
 <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
-<script type="module" src="starter/assets/js/main.js"></script>
+<script type="module" src="../starter/assets/js/main.js"></script>
 </body>
 </html>

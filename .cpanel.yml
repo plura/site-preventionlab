@@ -18,6 +18,7 @@ deployment:
     - /bin/cp -R placeholder/robots.txt $DEPLOYPATH
     - /bin/cp -R placeholder/sitemap.xml $DEPLOYPATH
     - /bin/cp -R placeholder/site.webmanifest $DEPLOYPATH
+    - /bin/cp -R placeholder/en $DEPLOYPATH
     - /bin/cp -R placeholder/starter $DEPLOYPATH
     # Deliberately absent: mail-templates/, tools/, package.json — build-time only. Add a line
     # here whenever a new deployable file lands at placeholder/ root, or it silently never

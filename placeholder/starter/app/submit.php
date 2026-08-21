@@ -204,9 +204,17 @@ if (!$sent) {
 }
 
 // —— Auto-reply to submitter —————————————————————————————————————————————————
-// Single-language site: one reply template. The starter picks a per-language one here (its
-// Tier 2) — reinstate that block from the starter if a second language is ever added.
+// Prefers a per-language reply template (contact-reply.en.html) and falls back to the
+// default-language one. Unlike the notification above, this email goes to the visitor, so it
+// has to match the language they filled the form in — the notification goes to the clinic,
+// which reads one language, and is deliberately left alone.
 $reply_template = __DIR__ . '/templates/contact-reply.html';
+if ($strings['_lang'] !== '') {
+    $localized = __DIR__ . "/templates/contact-reply.{$strings['_lang']}.html";
+    if (file_exists($localized)) {
+        $reply_template = $localized;
+    }
+}
 // No form-type or language part here: form-type is fixed in the owner's language (see above),
 // and language is redundant to the person who just submitted the form in it.
 send_mail(

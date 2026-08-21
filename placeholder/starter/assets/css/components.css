@@ -212,6 +212,53 @@ dialog p {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23111111' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
+/* ── Page controls ──
+   Fixed top-right rail. Holds the language switch; the starter also puts a theme toggle here,
+   which this project has no use for while it is single-theme. The rail and the shared circle
+   styling sit outside the switch's own block so a second control can join without either
+   needing to know about the other. */
+.page-controls {
+    position: fixed;
+    top: var(--pl-space-sm);
+    right: var(--pl-space-sm);
+    z-index: 3;
+    display: flex;
+    gap: 6px;
+}
+
+.page-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: 1px solid var(--pl-color-border);
+    border-radius: 50%;
+    color: var(--pl-color-muted);
+    cursor: pointer;
+    transition: border-color var(--pl-transition), color var(--pl-transition);
+}
+
+.page-control:hover {
+    border-color: var(--pl-color-accent);
+    color: var(--pl-color-accent);
+}
+
+@media (min-width: 480px) {
+    .page-controls { top: var(--pl-space-lg); right: var(--pl-space-lg); gap: 8px; }
+    .page-control  { width: 36px; height: 36px; }
+}
+
+/* Language switch — remove alongside the .lang-switch anchors in both pages and the whole en/
+   directory for a Portuguese-only site. */
+.lang-switch {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: var(--pl-tracking-sm);
+    text-decoration: none;
+}
+
 /* ── Form feedback ── */
 /* Set on the <form> once a submission succeeds, so what disappears is declared here rather than
    listed in a JS selector — modal.js used to walk .form-group/.btn-submit and set inline

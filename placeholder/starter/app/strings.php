@@ -9,8 +9,9 @@ declare(strict_types=1);
 // Keys are semantic, not the English source text. This copy gets rewritten per project, and
 // source-string keys go stale the moment one is reworded.
 //
-// This site is Portuguese-only, so there is no $OVERRIDES block and no _lang-driven reply
-// template - the starter's Tier 2. Add a language by reinstating both from the starter.
+// Portuguese is $BASE, not a translation: this is a Portuguese site and English is the delta
+// below. That is the inverse of the starter's shipped arrangement, so check which direction
+// its examples mean before following them.
 //
 // Portuguese must stay gender-neutral: nothing here knows who is writing in. That rules out
 // "Obrigado"/"Obrigada" and any past participle agreeing with the reader.
@@ -26,14 +27,30 @@ $BASE = [
     'subject_reply' => '%s — recebemos o seu contacto',
 ];
 
+
+// Translations, as a delta against $BASE. Every key is listed because $BASE is Portuguese and
+// nothing carries over. Remove this block along with en/ to go back to a single language.
+$OVERRIDES = [
+    'en' => [
+        'method_not_allowed' => 'Method not allowed.',
+        'config_error'       => 'Server configuration error.',
+        'required_fields'    => 'Please fill in the required fields.',
+        'invalid_email'      => 'Please enter a valid email address.',
+        'send_error'         => 'Could not send your message. Please try again, or get in touch by email.',
+        'sent'               => 'Message sent. You will hear back shortly.',
+
+        'subject_reply' => '%s — message received',
+    ],
+];
+
 // Owner-facing copy, outside any language resolution: the notification goes to the clinic, which
 // reads one language regardless. Applied last so nothing can override it.
 $OWNER = [
     'subject_notify' => '%s — novo contacto do site',
 ];
 
-// The form posts the language it was rendered in (see form.js). Inert while there is only one
-// language, but submit.php's kicker reads it, so it is resolved rather than assumed.
+// The form posts the language it was rendered in (see form.js). Trimmed to a bare two-letter
+// code so 'en-GB' matches 'en'; anything unknown or absent falls through to $BASE.
 $lang = strtolower(substr((string) ($_POST['lang'] ?? ''), 0, 2));
 
-return array_merge($BASE, $OWNER, ['_lang' => $lang]);
+return array_merge($BASE, $OVERRIDES[$lang] ?? [], $OWNER, ['_lang' => $lang]);

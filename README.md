@@ -41,11 +41,14 @@ project does *differently* is below.
 - **`starter/custom/`** — `js/animations.js` (the GSAP entrance sequence) and
   `components/logo/` + `components/particles/`. This project's own code; never
   diff it against the starter.
-- **Single language, no mailing list, no dark/light mode.** All three are
-  starter features deliberately not brought in. `strings.php` has no
-  `$OVERRIDES`, `submit.php` has no newsletter block and no per-language reply
-  template, and `build-mail.mjs` has no Tier 2 entry. Reinstating any of them
-  means copying the marked blocks back from the starter.
+- **Bilingual, with Portuguese as the base** — PT at `/`, EN at `/en/`, both
+  indexed and cross-linked. That is the inverse of the starter, which ships
+  English at the root, so check which direction its examples mean:
+  `$BASE` in `strings.php` is Portuguese and `$OVERRIDES['en']` is the delta,
+  and the second reply template is `contact-reply.en.mjml`.
+- **No mailing list and no dark/light mode.** Both are starter features
+  deliberately not brought in. `submit.php` has no newsletter block; the CSS is
+  a single palette. Reinstating either means copying the marked blocks back.
 - **CSS tokens are `--pl-*`, not `--site-*`.** The naming predates the starter's.
   A `base.css` change from the starter never applies verbatim here.
 
@@ -57,7 +60,8 @@ All run from `placeholder/`:
   to `starter/app/templates/`, which is what PHP reads; there is no `dist/` and
   no copy step.
 - `npm run check:config` — after adding or removing a feature in the markup.
-- `npm run check:pages` — inert while there's one language.
+- `npm run check:pages` — after editing `index.html` or `en/index.html`; they
+  are copies of each other and nothing else keeps them in step.
 
 Uncommitted local files, both gitignored: `.vscode/sftp.json` (from
 `.vscode/sftp.json.example`) and `placeholder/starter/app/config.php` (from

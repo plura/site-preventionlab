@@ -37,7 +37,7 @@ const OUT = resolve(ROOT, 'starter/app/templates');
 const TEMPLATES = [
 	{ src: 'contact/contact.mjml', out: 'contact.html' },
 	{ src: 'contact/contact-reply.mjml', out: 'contact-reply.html' },
-	// No Tier 2 entry: this site is Portuguese-only. Add one here alongside a second language.
+	{ src: 'contact/contact-reply.en.mjml', out: 'contact-reply.en.html' },
 ];
 
 /**

@@ -1,0 +1,41 @@
+<mjml>
+<mj-head>
+	<mj-title>Thank you for getting in touch</mj-title>
+	<mj-preview>Thank you for getting in touch — {{CLIENT_NAME}}</mj-preview>
+	<mj-include path="../_partials/_head.mjml" />
+</mj-head>
+<mj-body>
+	<mj-wrapper mj-class="page-frame" css-class="page-frame">
+
+		<mj-include path="../_partials/_header.mjml" />
+
+		<!--
+			The English translation of contact-reply.mjml, picked by submit.php when the enquiry
+			came from en/. Portuguese is the base here, so this is the delta - the inverse of the
+			starter's arrangement.
+
+			Keep the two structurally identical: only the heading, the intro sentence and the
+			button label are allowed to differ. Everything else, including both includes and the
+			message-quote raw row, is the same file shape.
+
+			English has no "Obrigada" problem - the Portuguese original uses the feminine because
+			it agrees with Dra. Cristina Ferreira Leite as the speaker, and there is nothing to
+			carry across.
+		-->
+		<mj-section mj-class="body-card" css-class="body-card">
+			<mj-column>
+				<mj-text mj-class="heading" align="center" padding="0 0 20px">Thank you for getting in touch</mj-text>
+				<mj-text mj-class="intro-text" align="center">Hello %name%, we have received your message about %interest%. Dr. Cristina Ferreira Leite will review it and we will be in touch with you shortly.</mj-text>
+				<mj-raw><tr><td class="message-quote">%message%</td></tr></mj-raw>
+				<mj-divider mj-class="field-divider" padding="20px 0 0" />
+				<mj-text mj-class="urgent-text">If the matter is urgent, you can reach us directly on <a href="tel:{{CLIENT_PHONE_RAW}}" class="urgent-link">{{CLIENT_PHONE_DISPLAY}}</a>.</mj-text>
+				<mj-button mj-class="cta-button" href="{{CLIENT_URL}}">Visit the site</mj-button>
+			</mj-column>
+		</mj-section>
+
+		<mj-include path="../_partials/_footer.mjml" />
+		<mj-include path="../_partials/_credit.mjml" />
+
+	</mj-wrapper>
+</mj-body>
+</mjml>
