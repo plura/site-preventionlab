@@ -1,0 +1,29 @@
+# Triggers the cPanel Git Version Control deploy over HTTPS (UAPI, port 2083). From
+# site-placeholder-starter's .github/workflows/deploy.yml.example.
+#
+# Lives at the REPO root: GitHub reads workflows only from <repo-root>/.github/workflows/.
+#
+# Needs a cPanel API token (cPanel -> Security -> Manage API Tokens) stored as the repo secret
+# CPANEL_TOKEN.
+name: Deploy to cPanel
+
+on:
+  # Auto-deploy: merging to main IS the decision to ship. Delete this block for manual-only if
+  # work ever starts landing directly on main — otherwise every half-finished commit goes live.
+  push:
+    branches: [main]
+  # The manual "Run workflow" button, kept alongside.
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to cPanel
+        uses: pinkasey/cpanel-deploy-action@v1.0.0
+        with:
+          hostname: 'https://preventionlab.pt'
+          repository_root: '/home/prevent1/repositories/site-preventionlab'
+          branch: main
+          cpanel_username: 'prevent1'
+          cpanel_token: '${{ secrets.CPANEL_TOKEN }}'

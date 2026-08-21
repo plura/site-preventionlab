@@ -65,15 +65,14 @@ Uncommitted local files, both gitignored: `.vscode/sftp.json` (from
 
 ## Deployment
 
-SFTP sync, not the starter's [standard cPanel git deploy](https://github.com/plura/site-placeholder-starter/blob/ba6d506/docs/deploying.md)
-— the host hasn't been checked for Git™ Version Control. The `placeholder`
-context maps to the site root, and `mail-templates/`, `tools/` and
-`package.json` are in the ignore list as build-time only.
+The starter's standard — [see it there](https://github.com/plura/site-placeholder-starter/blob/ba6d506/docs/deploying.md),
+values are in [`.cpanel.yml`](.cpanel.yml). Merging to `main` deploys. SFTP stays configured
+for the one thing a git deploy can never carry: `placeholder/starter/app/config.php`.
 
-**The live site is behind the repo.** preventionlab.pt still serves the
-pre-`starter/` layout, so the first sync after this work will need the old
-`assets/` and `app/` directories removing by hand — the sync runs with
-`delete: false`, so nothing clears them.
+**The live site is behind the repo, and by two structural steps** — preventionlab.pt still
+serves the pre-`starter/` flat layout. So the first deploy after this is a restructure: it needs
+`config.php` moved to `starter/app/` on the server *first*, and leaves the old `assets/` and
+`app/` directories live afterwards, since `cp -R` cannot delete. Both are manual, once.
 
 ## Contact
 

@@ -1,0 +1,24 @@
+---
+# cPanel Git Version Control deploy manifest, from site-placeholder-starter's
+# .cpanel.yml.example. Lives at the REPO root: cPanel reads it only from here, never from
+# placeholder/.
+#
+# An explicit include-list, never a mirror. Two consequences, both load-bearing:
+#
+#   1. placeholder/starter/app/config.php survives every deploy, because nothing here names it.
+#      It is gitignored, so a git deploy could never carry it anyway — it goes up over SFTP once
+#      and stays put.
+#   2. cp -R CANNOT DELETE. Removing a file from the repo does not remove it from the webroot,
+#      ever. That is why the pre-starter/ assets/ and app/ directories need clearing by hand the
+#      first time this runs.
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/prevent1/public_html/
+    - /bin/cp -R placeholder/index.html $DEPLOYPATH
+    - /bin/cp -R placeholder/robots.txt $DEPLOYPATH
+    - /bin/cp -R placeholder/sitemap.xml $DEPLOYPATH
+    - /bin/cp -R placeholder/site.webmanifest $DEPLOYPATH
+    - /bin/cp -R placeholder/starter $DEPLOYPATH
+    # Deliberately absent: mail-templates/, tools/, package.json — build-time only. Add a line
+    # here whenever a new deployable file lands at placeholder/ root, or it silently never
+    # reaches the server.
