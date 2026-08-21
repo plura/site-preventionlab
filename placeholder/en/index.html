@@ -135,15 +135,6 @@
                     <i data-lucide="arrow-right" width="16" height="16"></i>
                 </button>
             </div>
-                <!-- Newsletter opt-in — also subscribes the submitter, via submit.php's own
-                     block. Not wrapped in a .form-group: that styles its label as a block
-                     caption and its input as a full-width underlined field, neither of which
-                     suits a checkbox. .form-check carries the matching row spacing itself. -->
-                <label class="form-check">
-                    <input type="checkbox" name="newsletter" value="1">
-                    <span>I would also like to receive news by email</span>
-                </label>
-
             <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
         </form>
     </div>
@@ -222,8 +213,20 @@
                 <label for="message">Message <span class="label-note">(optional)</span></label>
                 <textarea id="message" name="message" placeholder="How can we help?"></textarea>
             </div>
+            <!-- Newsletter opt-in — also subscribes the submitter, via submit.php's own optional
+                 block. Not wrapped in a .form-group: that styles its label as a block caption and
+                 its input as a full-width underlined field, neither of which suits a checkbox.
+                 .form-check carries the matching row spacing itself. -->
+            <label class="form-check">
+                <input type="checkbox" name="newsletter" value="1">
+                <span>I would also like to receive news by email</span>
+            </label>
+            <!-- Identifies this form in the notification email's kicker (%kicker%, built by
+                 submit.php). Value is in the OWNER's language, not the visitor's — the clinic reads
+                 Portuguese whichever page the enquiry came from. Keep identical in both pages. -->
+            <input type="hidden" name="form_type" value="Formulário de contacto">
             <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-            <button type="submit" class="btn-submit">Send</button>
+            <button type="submit" class="btn-submit" data-submitting="Sending…">Send</button>
         </form>
     </div>
 </dialog>
